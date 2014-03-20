@@ -1,0 +1,27 @@
+
+body {
+ background: #0066b3;
+ color: #ffffff;
+ margin: 3px 8px;
+ font-family: verdana, helvetica, sans-serif;
+ background-image: url("/images/syn-circ-0066b3-ffffff-170x170.png");
+ background-repeat: no-repeat;
+ background-attachment: fixed;
+ background-position: 1% 1%;
+}
+a:link {
+ color: #ffefff;
+}
+a:visited {
+ color: #ffefff;
+}
+a:hover {
+ color: #efffef;
+ font-weight: 500;
+}
+div#col1 {
+ position: absolute;
+ top: 80px;
+ left: 250px;
+ width: 400px;
+}
