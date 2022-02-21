@@ -17,13 +17,12 @@ a:visited {
 }
 a:hover {
  color: #00A0F0;
- font-weight: 500;
 }
-div#col1 {
+div#column {
  position: absolute;
  top: 80px;
  left: 250px;
- width: 400px;
+ width: 500px;
  background-color: #efefef;
  padding: 16px;
 }
