@@ -20,15 +20,6 @@
       background-position: 10% 10%;
      }
    }
-   a:link {
-    color: #0066b3;
-   }
-   a:visited {
-    color: #0066b3;
-   }
-   a:hover {
-    color: #00A0F0;
-   }
    div#column {
     position: absolute;
     top: 60px;
@@ -45,6 +36,18 @@
       height: 80%;
       background-color: #efefefa5;
       padding: 32px;
+     }
+   }
+   .text {
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 16px;
+    color: #0066b3;
+    text-decoration: none;
+   }
+   @media screen and (max-width: 1000px) {
+     .text {
+      font-size: 32px;
      }
    }
    img.text {
@@ -65,23 +68,20 @@
     color: #0066b3;
     text-decoration: none;
    }
-   span.text {
-    font-family: monospace;
-    font-weight: bold;
-    font-size: 16px;
+   a:link {
     color: #0066b3;
-    text-decoration: none;
    }
-   @media screen and (max-width: 1000px) {
-     span.text {
-      font-size: 32px;
-     }
+   a:visited {
+    color: #0066b3;
+   }
+   a:hover {
+    color: #00A0F0;
    }
   </style>
  </head>
  <body>
 
-   <div id="column">
+   <div id="column" class="text">
      <dl class="text">
        <dt class="text"><a class="text" href="https://twitter.com/syntelos"><img class="text" src="images/twitter-logo-blue.svg"/><span class="text">@syntelos</span></a></dt>
        <dd class="text">
