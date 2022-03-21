@@ -44,6 +44,7 @@
       width: 80%;
       height: 80%;
       background-color: #efefef80;
+      padding: 32px;
      }
    }
    img.text {
@@ -53,6 +54,13 @@
     vertical-align: middle;
     margin: 3px;
    }
+   @media screen and (max-width: 1000px) {
+     img.text {
+      width: 32px;
+      height: 32px;
+      margin: 6px;
+     }
+   }
    a.text {
     color: #0066b3;
     text-decoration: none;
@@ -60,13 +68,13 @@
    span.text {
     font-family: monospace;
     font-weight: bold;
-    font-size: large;
+    font-size: 16px;
     color: #0066b3;
     text-decoration: none;
    }
    @media screen and (max-width: 1000px) {
      span.text {
-      font-size: xxx-large;
+      font-size: 32px;
      }
    }
   </style>
