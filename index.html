@@ -15,6 +15,11 @@
     background-attachment: fixed;
     background-position: 60px 160px;
    }
+   @media screen and (max-width: 600px) {
+     body {
+      background-position: 10px 10px;
+     }
+   }
    a:link {
     color: #0066b3;
    }
@@ -31,6 +36,13 @@
     width: 500px;
     background-color: #efefef;
     padding: 16px;
+   }
+   @media screen and (max-width: 600px) {
+     div#column {
+      top: 10px;
+      left: 10%;
+      width: 80%;
+     }
    }
    img.text {
     display: inline;
