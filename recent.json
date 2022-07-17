@@ -3,7 +3,15 @@
         "id" : "page"
     },
     {
+        "id": "pornography-20220716",
+        "icon": "earth",
+        "path": "/syntelos /science /anthropology /sociology /pornography /20220716/",
+        "link": "https://drive.google.com/drive/folders/1yAGPipIgogfhN4s_VkUMHZ-wtjT3SufM",
+        "embed": "https://drive.google.com/file/d/1Lm5FsJ5YMF_iLJ1jgAnWM7edeePLKhxs/preview"
+    },
+    {
         "id": "morality-20220716",
+        "icon": "earth",
         "path": "/syntelos /science /anthropology /sociology /technological morality/",
         "link": "https://drive.google.com/drive/folders/1qh3MOP0xYR2KaER-qX5FvSk2Gy5r7jCz",
         "embed": "https://drive.google.com/file/d/1z9zKsY9TC_Ok9ayw5dVa_DffpNTK0BVa/preview"
@@ -45,7 +53,8 @@
     },
     {
         "id" : "russia-20220712",
-        "path" : "/syntelos /science /anthropology /sociology /russia/",
+        "icon": "earth",
+        "path" : "/syntelos /science /anthropology /sociology /russia /20220712/",
         "link" : "https://drive.google.com/drive/folders/1IOJQUo-aaoN6CeeqHWqhAjqEMaXHDKW8",
         "embed" : "https://drive.google.com/file/d/1MoIhyH1CYdwXKK0ihaGAoiIfs-D6tP5O/preview"
     }
