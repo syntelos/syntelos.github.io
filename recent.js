@@ -4,7 +4,7 @@
  * CC-BY-NC https://creativecommons.org/licenses/by-nc/4.0/
  */
 
-var recent_schedule = 15000;
+var recent_schedule = 20000;
 
 /*
  * Global: visibile page object from directory.
