@@ -10,6 +10,12 @@
 var recent_current = null;
 
 /*
+ * Global: YYYYMMDD reference to recent_directory source
+ * text within "/recent/YYYMMDD.json".
+ */
+var recent_directory_index = null;
+
+/*
  * Global: array of objects established by
  * "recent.json" and enhanced with element "div" from
  * document.
@@ -17,7 +23,7 @@ var recent_current = null;
 var recent_directory = null;
 
 /*
- * Initialization
+ * UX display initialization
  */
 function recent_initialize(){
 
@@ -31,17 +37,19 @@ function recent_initialize(){
 
             if (null != div){
 
-                if (null != recent_current && div != recent_current){
+                if ("page" == pg.id){
 
-                    recent_current.visibility = 'hidden';
+                    if (null != recent_current && div != recent_current){
+
+                        recent_current.visibility = 'hidden';
+                    }
+
+                    recent_current = pg;
+
+                    div.style.visibility = 'visible';
+
+                    div.style.zIndex = 2;
                 }
-
-                recent_current = pg;
-
-                div.style.visibility = 'visible';
-
-                div.style.zIndex = 2;
-
             }
             else {
                 div = document.createElement("div");
@@ -105,7 +113,7 @@ function recent_initialize(){
 }
 
 /*
- * Navigation onclick
+ * UX display iteration
  */
 function recent_next (){
 
@@ -173,19 +181,50 @@ function recent_next (){
 /*
  * Initialization requires 'recent.json'.
  */
-{
-    var init_loader = new XMLHttpRequest();
+function recent_load (){
+    if (null != recent_directory_index){
+        var init_loader = new XMLHttpRequest();
 
-    init_loader.open("GET","/recent.json",true);
+        init_loader.open("GET","/recent/"+recent_directory_index+".json",true);
 
-    init_loader.onload = function (e) {
+        init_loader.onload = function (e) {
 
-        if (200 == init_loader.status && null != init_loader.responseText){
+            if (200 == init_loader.status && null != init_loader.responseText){
 
-            recent_directory = JSON.parse(init_loader.responseText);
+                recent_directory = JSON.parse(init_loader.responseText);
 
-            recent_initialize();
-        }
-    };
-    init_loader.send(null);
+                recent_initialize();
+            }
+        };
+        init_loader.send(null);
+    }
+}
+
+/*
+ * Initialization configuration from document UX URL or '/recent/index.txt'.
+ */
+function recent_configure (){
+
+    if (null != document.location.hash && 9 == document.location.hash.length){
+
+        recent_directory_index = document.location.hash.substring(1,9);
+
+        recent_load();
+    }
+    else {
+        var config_loader = new XMLHttpRequest();
+
+        config_loader.open("GET","/recent/index.txt",true);
+
+        config_loader.onload = function (e) {
+
+            if (200 == config_loader.status && null != config_loader.responseText && 8 < config_loader.responseText.length){
+
+                recent_directory_index = config_loader.responseText.substring(0,8);
+
+                recent_load();
+            }
+        };
+        config_loader.send(null);
+    }
 }
