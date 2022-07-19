@@ -10,10 +10,10 @@
 var recent_current = null;
 
 /*
- * Global: YYYYMMDD reference to recent_directory source
- * text within "/recent/YYYMMDD.json".
+ * Global: YYYYMMDD symbolic reference to recent_directory
+ * source text within "/recent/YYYMMDD.json".
  */
-var recent_directory_index = null;
+var recent_configuration = null;
 
 /*
  * Global: array of objects established by
@@ -23,42 +23,53 @@ var recent_directory_index = null;
 var recent_directory = null;
 
 /*
- * UX display initialization
+ * UX display re/initialization
  */
 function recent_initialize(){
 
     if (null != recent_directory){
 
-        for (index in recent_directory){
+        var children = document.body.childNodes;
+        var count = children.length;
+        var index;
+
+        for (index = 0; index < count; index++){
+
+            child = children.item(index);
+
+            if ("page text" == child.className){
+
+                if ("page" == child.id){
+
+                    child.style.visibility = 'visible';
+                }
+                else {
+
+                    child.style.visibility = 'hidden';
+                }
+            }
+        }
+
+        var count = recent_directory.length;
+
+        for (index = 0; index < count; index++){
 
             pg = recent_directory[index];
 
             div = document.getElementById(pg.id);
 
-            if (null != div){
+            if ("page" == pg.id){
 
-                if ("page" == pg.id){
-
-                    if (null != recent_current && div != recent_current){
-
-                        recent_current.visibility = 'hidden';
-                    }
-
-                    recent_current = pg;
-
-                    div.style.visibility = 'visible';
-
-                    div.style.zIndex = 2;
-                }
+                recent_current = pg;
             }
-            else {
+
+            if (null == div){
+
                 div = document.createElement("div");
 
                 div.id = pg.id;
                 div.className = 'page text';
                 div.style.visibility = 'hidden';
-
-                div.style.zIndex = 2;
 
                 dl = document.createElement("dl");
                 dl.className = 'text';
@@ -106,9 +117,10 @@ function recent_initialize(){
                 }
                 document.body.appendChild(div);
             }
+
         }
 
-        setTimeout(recent_next,3000);
+        setTimeout(recent_next,6000);
     }
 }
 
@@ -121,7 +133,9 @@ function recent_next (){
 
         next = false;
 
-        for (index in recent_directory){
+        var count = recent_directory.length;
+
+        for (index = 0; index < count; index++){
 
             pg = recent_directory[index];
 
@@ -152,7 +166,9 @@ function recent_next (){
 
         if (next){
 
-            for (index in recent_directory){
+            var count = recent_directory.length;
+
+            for (index = 0; index < count; index++){
 
                 pg = recent_directory[index];
 
@@ -174,57 +190,131 @@ function recent_next (){
             }
         }
 
-        setTimeout(recent_next,20000);
+        setTimeout(recent_next,6000);
     }
 }
 
 /*
- * Initialization requires 'recent.json'.
+ * Initialization directory from '/recent/YYYYMMDD.json'.
  */
-function recent_load (){
-    if (null != recent_directory_index){
-        var init_loader = new XMLHttpRequest();
+function recent_build (){
 
-        init_loader.open("GET","/recent/"+recent_directory_index+".json",true);
+    var selected = false;
 
-        init_loader.onload = function (e) {
+    var select = document.getElementById("configuration");
+    if (select.hasChildNodes()){
 
-            if (200 == init_loader.status && null != init_loader.responseText){
+        var children = select.childNodes;
+        var count = children.length;
+        var index;
+        for (index = 0; index < count; index++){
 
-                recent_directory = JSON.parse(init_loader.responseText);
+            var option = children.item(index);
+            if (option.selected){
+
+                recent_configuration = option.value;
+
+                document.location.hash = option.value;
+
+                selected = true;
+            }
+        }
+    }
+
+    if (null != recent_configuration){
+
+        var directory_loader = new XMLHttpRequest();
+
+        directory_loader.open("GET","/recent/"+recent_configuration+".json",true);
+
+        directory_loader.onload = function (e) {
+
+            if (200 == directory_loader.status && null != directory_loader.responseText){
+
+                recent_directory = JSON.parse(directory_loader.responseText);
 
                 recent_initialize();
             }
         };
-        init_loader.send(null);
+        directory_loader.send(null);
     }
 }
 
 /*
- * Initialization configuration from document UX URL or '/recent/index.txt'.
+ * Initialization configuration from '/recent/index.txt'.
  */
 function recent_configure (){
 
     if (null != document.location.hash && 9 == document.location.hash.length){
 
-        recent_directory_index = document.location.hash.substring(1,9);
-
-        recent_load();
+        recent_configuration = document.location.hash.substring(1,9);
     }
-    else {
-        var config_loader = new XMLHttpRequest();
 
-        config_loader.open("GET","/recent/index.txt",true);
+    var configuration_loader = new XMLHttpRequest();
 
-        config_loader.onload = function (e) {
+    configuration_loader.open("GET","/recent/index.txt",true);
 
-            if (200 == config_loader.status && null != config_loader.responseText && 8 < config_loader.responseText.length){
+    configuration_loader.onload = function (e) {
 
-                recent_directory_index = config_loader.responseText.substring(0,8);
+        if (200 == configuration_loader.status && null != configuration_loader.responseText && 8 < configuration_loader.responseText.length){
 
-                recent_load();
+            var index_txt = configuration_loader.responseText;
+            var index_ary = index_txt.split('\n');
+
+            if (null == recent_configuration){
+
+                recent_configuration = index_ary[0];
             }
-        };
-        config_loader.send(null);
-    }
+
+            var select = document.getElementById('configuration');
+            if (null != select){
+
+                var selection = false;
+
+                var count = index_ary.length;
+                var index;
+                for (index = 0; index < count; index++){
+
+                    var index_value = index_ary[index];
+                    if (8 == index_value.length){
+
+                        var option = document.createElement("option");
+                        option.className = 'text';
+                        option.value = index_value;
+                        option.innerText = index_value;
+
+                        if (index_value == recent_configuration){
+
+                            option.selected = 'true';
+
+                            selection = true;
+                        }
+
+                        select.appendChild(option);
+                    }
+                }
+
+                if (0 < count && (!selection)){
+
+                    var selected = index_ary[0];
+
+                    recent_configuration = selected;
+
+                    document.location.hash = selected;
+
+                    select.childNodes.item(0).selected = true;
+                }
+                else if (document.location.hash){
+
+                    document.location.hash = null;
+                }
+
+                select.onchange = recent_build;
+            }
+
+            recent_build();
+        }
+    };
+    configuration_loader.send(null);
+
 }

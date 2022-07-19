@@ -3,7 +3,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
  <head>
   <title>Syntelos</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
   <style type="text/css">
    body {
@@ -24,13 +23,31 @@
     left: 10%;
     width: 500px;
     background-color: #ffffffa5;
+    margin: 0;
     padding: 16px;
+    z-index: 2;
    }
    @media screen and (max-width: 1000px) {
      div.page {
       width: 80%;
       height: 80%;
       padding: 32px;
+     }
+   }
+   select.configuration {
+    display: block;
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    margin: 0;
+    padding: 6px;
+    background-color: #ffffffa5;
+    border: 1px solid #d0d0d0;
+    z-index: 3;
+   }
+   @media screen and (max-width: 1000px) {
+     select.configuration {
+      padding: 12px;
      }
    }
    .text {
@@ -79,13 +96,15 @@
     color: #00A0F0;
    }
   </style>
-  <script src="/recent.js">
+  <script language="javascript" src="/recent.js">
   </script>
-  <script>
+  <script language="javascript">
     recent_configure();
   </script>
  </head>
  <body>
+   <select id="configuration" class="configuration text">
+   </select>
 
    <div id="page" class="page text">
      <dl class="text">
