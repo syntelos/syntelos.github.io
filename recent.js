@@ -4,6 +4,8 @@
  * CC-BY-NC https://creativecommons.org/licenses/by-nc/4.0/
  */
 
+var recent_schedule = 10000;
+
 /*
  * Global: visibile page object from directory.
  */
@@ -120,7 +122,7 @@ function recent_initialize(){
 
         }
 
-        setTimeout(recent_next,6000);
+        setTimeout(recent_next,recent_schedule);
     }
 }
 
@@ -190,7 +192,7 @@ function recent_next (){
             }
         }
 
-        setTimeout(recent_next,6000);
+        setTimeout(recent_next,recent_schedule);
     }
 }
 
