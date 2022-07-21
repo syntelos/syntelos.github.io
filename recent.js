@@ -139,6 +139,21 @@ function recent_nav_left (){
     recent_page_prev();
 }
 
+function recent_nav_recycle (){
+
+    if (recent_paging_id){
+        clearInterval(recent_paging_id);
+        recent_paging_id = null;
+    }
+
+    recent_page_begin();
+
+    if (null == recent_paging_id){
+
+        recent_paging_id = setInterval(recent_page_next,recent_schedule);
+    }
+}
+
 function recent_nav_right (){
 
     if (recent_paging_id){
@@ -201,6 +216,28 @@ function recent_page_prev (){
         }
     }
 
+}
+
+function recent_page_begin (){
+    var children = document.body.childNodes;
+    var count = children.length;
+
+    for (index = 0; index < count; index++){
+
+        child = children.item(index);
+
+        if ('page text' == child.className){
+
+            if ('page' == child.id){
+
+                child.style.visibility = 'visible';
+            }
+            else {
+
+                child.style.visibility = 'hidden';
+            }
+        }
+    }
 }
 
 /*
