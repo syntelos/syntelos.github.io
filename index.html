@@ -38,17 +38,42 @@
     display: block;
     position: absolute;
     top: 2px;
-    right: 2px;
     margin: 0;
     padding: 6px;
     background-color: #ffffffa5;
     border: 1px solid #d0d0d0;
     z-index: 3;
+    cursor: pointer;
    }
    @media screen and (max-width: 1000px) {
      select.configuration {
       padding: 12px;
      }
+   }
+   select#catalog.configuration {
+    left: 2px;
+   }
+   select#directory.configuration {
+    right: 2px;
+   }
+   svg.navigation {
+    display: block;
+    position: absolute;
+    bottom: 2px;
+    width: 32px;
+    heigth: 32px;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffffa5;
+    border: 1px solid #d0d0d0;
+    z-index: 3;
+    cursor: pointer;
+   }
+   svg#left.navigation {
+    left: 2px;
+   }
+   svg#right.navigation {
+    right: 2px;
    }
    .text {
     font-family: monospace;
@@ -103,8 +128,16 @@
   </script>
  </head>
  <body>
-   <select id="configuration" class="configuration text">
+   <select id="catalog" class="configuration text">
    </select>
+   <select id="directory" class="configuration text">
+   </select>
+   <svg id="left" class="navigation text" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" onclick="recent_nav_left()">
+     <path fill="none" stroke-width="20" stroke="#0066b3" d="M 70 20 L 30 50 L 70 80" />
+   </svg>
+   <svg id="right" class="navigation text" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" onclick="recent_nav_right()">
+     <path fill="none" stroke-width="20" stroke="#0066b3" d="M 30 20 L 70 50 L 30 80" />
+   </svg>
 
    <div id="page" class="page text">
      <dl class="text">

@@ -4,25 +4,24 @@
  * CC-BY-NC https://creativecommons.org/licenses/by-nc/4.0/
  */
 
-var recent_schedule = 20000;
+var recent_schedule = 10000;
 
 /*
- * Global: visibile page object from directory.
- */
-var recent_current = null;
-
-/*
- * Global: YYYYMMDD symbolic reference to recent_directory
- * source text within "/recent/YYYMMDD.json".
+ * YYYYMMDD symbolic reference to recent_directory source
+ * text within "/recent/YYYMMDD.json".
  */
 var recent_configuration = null;
 
 /*
- * Global: array of objects established by
- * "recent.json" and enhanced with element "div" from
- * document.
+ * Array of objects established by "recent.json" and
+ * enhanced with element "div" from document.
  */
 var recent_directory = null;
+
+/*
+ * Timeout ID for UX default auto-paging behavior.
+ */
+var recent_paging_id = null;
 
 /*
  * UX display re/initialization
@@ -34,6 +33,7 @@ function recent_initialize(){
         var children = document.body.childNodes;
         var count = children.length;
         var index;
+        var child;
 
         for (index = 0; index < count; index++){
 
@@ -53,17 +53,14 @@ function recent_initialize(){
         }
 
         var count = recent_directory.length;
+        var pg;
+        var div;
 
         for (index = 0; index < count; index++){
 
             pg = recent_directory[index];
 
             div = document.getElementById(pg.id);
-
-            if ("page" == pg.id){
-
-                recent_current = pg;
-            }
 
             if (null == div){
 
@@ -122,88 +119,153 @@ function recent_initialize(){
 
         }
 
-        setTimeout(recent_next,recent_schedule);
+        if (null == recent_paging_id){
+
+            recent_paging_id = setInterval(recent_page_next,recent_schedule);
+        }
     }
 }
 
 /*
- * UX display iteration
+ * UX display navigation
  */
-function recent_next (){
+function recent_nav_left (){
 
-    if (null != recent_current){
+    if (recent_paging_id){
+        clearInterval(recent_paging_id);
+        recent_paging_id = null;
+    }
 
-        next = false;
+    recent_page_prev();
+}
 
-        var count = recent_directory.length;
+function recent_nav_right (){
 
-        for (index = 0; index < count; index++){
+    if (recent_paging_id){
+        clearInterval(recent_paging_id);
+        recent_paging_id = null;
+    }
 
-            pg = recent_directory[index];
+    recent_page_next();
+}
 
-            if (pg == recent_current){
+/*
+ * UX display paging
+ */
+function recent_page_prev (){
 
-                div = document.getElementById(pg.id);
+    var prev = false;
 
-                div.style.visibility = 'hidden';
+    var children = document.body.childNodes;
+
+    var count = children.length;
+
+    for (index = (count-1); index >= 0; index--){
+
+        child = children.item(index);
+
+        if ('page text' == child.className){
+
+            if ('visible' == child.style.visibility){
+
+                child.style.visibility = 'hidden';
+
+                prev = true;
+            }
+            else if (prev){
+
+                child.style.visibility = 'visible';
+
+                prev = false;
+
+                break;
+            }
+        }
+    }
+
+    if (prev){
+
+        for (index = (count-1); index >= 0; index--){
+
+            child = children.item(index);
+
+            if ('page text' == child.className){
+
+                child.style.visibility = 'visible';
+
+                prev = false;
+
+                break;
+
+            }
+        }
+    }
+
+}
+
+/*
+ * UX display paging
+ */
+function recent_page_next (){
+
+    var next = false;
+
+    var children = document.body.childNodes;
+
+    var count = children.length;
+
+    for (index = 0; index < count; index++){
+
+        child = children.item(index);
+
+        if ('page text' == child.className){
+
+            if ('visible' == child.style.visibility){
+
+                child.style.visibility = 'hidden';
 
                 next = true;
             }
             else if (next){
 
-                div = document.getElementById(pg.id);
+                child.style.visibility = 'visible';
 
-                if (null != div){
+                next = false;
 
-                    recent_current = pg;
-
-                    div.style.visibility = 'visible';
-
-                    next = false;
-
-                    break;
-                }
+                break;
             }
         }
-
-        if (next){
-
-            var count = recent_directory.length;
-
-            for (index = 0; index < count; index++){
-
-                pg = recent_directory[index];
-
-                if (pg != recent_current){
-
-                    div = document.getElementById(pg.id);
-
-                    if (null != div){
-
-                        recent_current = pg;
-
-                        div.style.visibility = 'visible';
-
-                        next = false;
-
-                        break;
-                    }
-                }
-            }
-        }
-
-        setTimeout(recent_next,recent_schedule);
     }
+
+    if (next){
+
+        for (index = 0; index < count; index++){
+
+            child = children.item(index);
+
+            if ('page text' == child.className){
+
+                child.style.visibility = 'visible';
+
+                next = false;
+
+                break;
+
+            }
+        }
+    }
+
 }
 
 /*
- * Initialization directory from '/recent/YYYYMMDD.json'.
+ * Construct 'recent_directory' from
+ * '/recent/YYYYMMDD.json'.
  */
 function recent_build (){
 
     var selected = false;
 
-    var select = document.getElementById("configuration");
+    var select = document.getElementById("directory");
     if (select.hasChildNodes()){
 
         var children = select.childNodes;
@@ -219,6 +281,23 @@ function recent_build (){
                 document.location.hash = option.value;
 
                 selected = true;
+            }
+        }
+    }
+
+    {
+        var children = document.body.childNodes;
+        var count = children.length;
+        var index;
+        var child;
+
+        for (index = (count-1); 0 <= index; index--){
+
+            child = document.body.childNodes.item(index);
+
+            if (null != child && "page text" == child.className && "page" != child.id){
+
+                document.body.removeChild(child);
             }
         }
     }
@@ -243,7 +322,8 @@ function recent_build (){
 }
 
 /*
- * Initialization configuration from '/recent/index.txt'.
+ * Construct 'recent_configuration' from UX, catalog and
+ * directory selectors.
  */
 function recent_configure (){
 
@@ -253,13 +333,16 @@ function recent_configure (){
     }
 
     var configuration_loader = new XMLHttpRequest();
-
+    /*
+     * [TODO] catalog
+     */
     configuration_loader.open("GET","/recent/index.txt",true);
 
     configuration_loader.onload = function (e) {
 
         if (200 == configuration_loader.status && null != configuration_loader.responseText && 8 < configuration_loader.responseText.length){
-
+            /*
+             */
             var index_txt = configuration_loader.responseText;
             var index_ary = index_txt.split('\n');
 
@@ -267,9 +350,23 @@ function recent_configure (){
 
                 recent_configuration = index_ary[0];
             }
+            /*
+             * [TODO] catalog
+             */
+            var catalog = document.getElementById('catalog');
+            if (null != catalog){
+                var option = document.createElement("option");
+                option.className = 'text';
+                option.value = "2022";
+                option.innerText = "2022";
+                option.selected = 'true';
 
-            var select = document.getElementById('configuration');
-            if (null != select){
+                catalog.appendChild(option);
+            }
+            /*
+             */
+            var directory = document.getElementById('directory');
+            if (null != directory){
 
                 var selection = false;
 
@@ -292,7 +389,7 @@ function recent_configure (){
                             selection = true;
                         }
 
-                        select.appendChild(option);
+                        directory.appendChild(option);
                     }
                 }
 
@@ -304,14 +401,14 @@ function recent_configure (){
 
                     document.location.hash = selected;
 
-                    select.childNodes.item(0).selected = true;
+                    directory.childNodes.item(0).selected = true;
                 }
                 else if (document.location.hash){
 
                     document.location.hash = null;
                 }
 
-                select.onchange = recent_build;
+                directory.onchange = recent_build;
             }
 
             recent_build();
