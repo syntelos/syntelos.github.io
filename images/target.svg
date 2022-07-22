@@ -1,15 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300">
-  <metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
-    <rdf:RDF>
-      <cc:Work>
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-        <dc:source rdf:resource="https://commons.wikimedia.org/wiki/User:Sarang"/>
-        <dc:source rdf:resource="https://www.syntelos.io/images/target.svg"/>
-        <dc:license rdf:resource="https://creativecommons.org/licenses/by-nc/4.0/" />
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
-  <path fill="none" stroke="#0066b3" stroke-width="50" d="m 149 25 a 125 125 0 1 0 2 0 z m 2 100 a 25 25 0 1 1 -2 0 z"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" version="1.1">
+
+  <circle fill="none" stroke="#0066b3" stroke-width="50" cx="150" cy="150" r="100"/>
+  <circle fill="#0066b3" stroke="none" cx="150" cy="150" r="30"/>
 </svg>
