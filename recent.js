@@ -18,7 +18,7 @@ var recent_catalog = '2022';
  */
 var recent_directory = null;
 /*
- * Timeout ID for UX default auto-paging behavior.
+ * Interval ID for UX default auto-paging behavior.
  */
 var recent_paging_id = null;
 
@@ -238,7 +238,7 @@ function recent_select_directory(){
         for (index = 0; index < count; index++){
 
             var option = children.item(index);
-            if (option.selected){
+            if (option.selected && null != option.value){
 
                 recent_directory = option.value;
 
@@ -378,15 +378,14 @@ function recent_configure_directory(){
 
                 var selected = index_ary[0];
 
-                recent_directory = selected;
+                if (null != selected){
 
-                document.location.hash = selected;
+                    recent_directory = selected;
 
-                directory.childNodes.item(0).selected = true;
-            }
-            else if (document.location.hash){
+                    document.location.hash = selected;
 
-                document.location.hash = null;
+                    directory.childNodes.item(0).selected = true;
+                }
             }
 
             directory.onchange = recent_select_directory;
