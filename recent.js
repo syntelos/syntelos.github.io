@@ -254,28 +254,14 @@ function recent_select_directory(){
  * Document body <onload>.
  */
 function recent_configure(){
-
+    /*
+     */
     if (null != document.location.hash && 9 == document.location.hash.length){
 
         recent_directory = document.location.hash.substring(1,9);
     }
-
-    var catalog = document.getElementById('catalog');
-    if (null != catalog){
-
-        var children = catalog.childNodes;
-        var count = children.length;
-        var index;
-        var child;
-
-        for (index = (count-1); 0 <= index; index--){
-
-            child = children.item(index);
-
-            catalog.removeChild(child);
-        }
-    }
-
+    /*
+     */
     var catalog_loader = new XMLHttpRequest();
 
     catalog_loader.open("GET","/recent/index.txt",true);
