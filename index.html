@@ -135,15 +135,14 @@
   </style>
   <script language="javascript" src="/recent.js">
   </script>
-  <script language="javascript">
-    recent_configure();
-  </script>
  </head>
- <body>
+ <body onload="recent_configure()">
+
    <select id="catalog" class="configuration text">
    </select>
    <select id="directory" class="configuration text">
    </select>
+
    <svg id="left" class="navigation text" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" onclick="recent_nav_left()">
      <path fill="none" stroke-width="20" stroke="#0066b3" d="M 70 20 L 30 50 L 70 80" />
    </svg>
