@@ -333,6 +333,7 @@ function recent_configure_directory(){
             directory.removeChild(child);
         }
     }
+
     var directory_loader = new XMLHttpRequest();
 
     directory_loader.open("GET","/recent/"+recent_catalog+"/index.txt",true);
@@ -349,7 +350,16 @@ function recent_configure_directory(){
                 recent_directory = index_ary[0];
             }
 
-            var selection = false;
+            var selected = null;
+
+            if (null != recent_directory){
+
+                selected = recent_directory;
+            }
+            else if (0 < count){
+
+                selected = index_ary[0];
+            }
 
             var count = index_ary.length;
             var index;
@@ -363,30 +373,19 @@ function recent_configure_directory(){
                     option.value = index_value;
                     option.innerText = index_value;
 
-                    if (index_value == recent_directory){
+                    if (null != selected && selected == index_value){
 
                         option.selected = 'true';
 
-                        selection = true;
+                        recent_directory = selected;
+
+                        document.location.hash = selected;
                     }
 
                     directory.appendChild(option);
                 }
             }
 
-            if (0 < count && (!selection)){
-
-                var selected = index_ary[0];
-
-                if (null != selected){
-
-                    recent_directory = selected;
-
-                    document.location.hash = selected;
-
-                    directory.childNodes.item(0).selected = true;
-                }
-            }
 
             directory.onchange = recent_select_directory;
 
