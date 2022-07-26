@@ -471,11 +471,11 @@ function recent_configure_pages(){
                         div.style.visibility = 'hidden';
 
                         dl = document.createElement("dl");
-                        dl.className = 'text';
+                        dl.className = 'recent';
                         div.appendChild(dl);
 
                         dt = document.createElement("dt");
-                        dt.className = 'text';
+                        dt.className = 'recent';
                         dl.appendChild(dt);
 
                         if (pg.link && pg.path){
@@ -504,7 +504,7 @@ function recent_configure_pages(){
                         }
 
                         dd = document.createElement("dd");
-                        dd.className = 'text';
+                        dd.className = 'recent';
                         dl.appendChild(dd);
 
                         if (pg.embed){
