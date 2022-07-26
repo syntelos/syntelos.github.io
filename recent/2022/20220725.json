@@ -3,7 +3,14 @@
         "id" : "page"
     },
     {
-        "id": "LOVEINT-20220725",
+        "id": "LOVEINT-20220725-1",
+        "icon": "twitter",
+        "path": "/syntelos /science /anthropology /cyber /LOVEINT/",
+        "link": "https://drive.google.com/drive/folders/11_3G0CnPqqQmNXsIbJU1i_CBDPwKQNzk",
+        "embed": "https://drive.google.com/file/d/1F84FMAU1mv4ZxvYW5VSGEC1AGJ5Tli4J/preview"
+    },
+    {
+        "id": "LOVEINT-20220725-0",
         "icon": "twitter",
         "path": "/syntelos /science /anthropology /cyber /LOVEINT/",
         "link": "https://drive.google.com/drive/folders/11_3G0CnPqqQmNXsIbJU1i_CBDPwKQNzk",
