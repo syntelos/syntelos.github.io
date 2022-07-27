@@ -21,18 +21,13 @@
     position: absolute;
     top: 10%;
     left: 10%;
-    width: 500px;
+    width: 600px;
+    height: 600px;
     background-color: #ffffffa5;
     margin: 0;
-    padding: 16px;
+    padding: 12px;
     z-index: 2;
-   }
-   @media screen and (max-width: 1000px) {
-     div.page {
-      width: 70%;
-      height: 70%;
-      padding: 32px;
-     }
+    vertical-align: middle;
    }
    select.configuration {
     display: block;
@@ -90,22 +85,16 @@
    .text {
     font-family: monospace;
     font-weight: bold;
-    font-size: 16px;
+    font-size: 18px;
     color: #0066b3;
     text-decoration: none;
+    vertical-align: middle;
    }
-   @media screen and (max-width: 1000px) {
-     .text {
-      font-size: 32px;
-     }
+   dt.text {
+    height: 32px;
    }
-   dl.recent {
-    margin: 6px;
-   }
-   @media screen and (max-width: 1000px) {
-     dl.recent {
-       margin: 12px;
-     }
+   dd.text {
+    height: 32px;
    }
    dt.recent {
     height: 50px;
@@ -117,31 +106,15 @@
    }
    img.text {
     display: inline;
-    width: 16px;
-    height: 16px;
-    vertical-align: middle;
+    width: 18px;
+    height: 18px;
     margin: 3px;
    }
-   @media screen and (max-width: 1000px) {
-     img.text {
-      width: 32px;
-      height: 32px;
-      margin: 6px;
-     }
-   }
    iframe.embed {
-     width: 400px;
-     height: 400px;
+     width: 500px;
+     height: 500px;
      margin: 6px;
      padding: 6px;
-   }
-   @media screen and (max-width: 1000px) {
-     iframe.embed {
-       width: 500px;
-       height: 500px;
-       margin: 12px;
-       padding: 12px;
-     }
    }
    a.text {
     color: #0066b3;
@@ -181,44 +154,29 @@
    <div id="page" class="page text">
      <dl class="text">
        <dt class="text"><a class="text" href="https://twitter.com/syntelos"><img class="text" src="/images/twitter.svg"/><span class="text">@syntelos</span></a></dt>
-       <dd class="text">
-         <dl class="text">
-           <dt class="text"><a class="text" href="https://drive.google.com/drive/folders/1185Tifv9VeoG8E0DGC6qUGPt0JdA8e2k?usp=sharing"><img class="text" src="/images/docs.svg"/><span class="text">/syntelos/</span></a></dt>
-           <dt class="text"><a class="text" href="https://drive.google.com/drive/folders/1Y0oFXaD-HZcoAVqQZUtGH0rg0fSLA5LE?usp=sharing"><img class="text" src="/images/docs.svg"/><span class="text">/syntelos/science/</span></a></dt>
-           <dt class="text"><a class="text" href="https://drive.google.com/drive/folders/1OaTyuOezcbgCu433asC7dkqgCaYo_jAK?usp=sharing"><img class="text" src="/images/docs.svg"/><span class="text">/syntelos/science/computing</span></a></dt>
-           <dt class="text"><a class="text" href="https://drive.google.com/drive/folders/18Z2baXg9aClWlqw4nkRIfbjjX1g1OqhF?usp=sharing"><img class="text" src="/images/docs.svg"/><span class="text">/syntelos/science/anthropology</span></a></dt>
-         </dl>
-       </dd>
+
+       <dd class="text"><a class="text" href="https://drive.google.com/drive/folders/1185Tifv9VeoG8E0DGC6qUGPt0JdA8e2k?usp=sharing"><img class="text" src="/images/docs.svg"/><span class="text">/syntelos/</span></a></dd>
+       <dd class="text"><a class="text" href="https://drive.google.com/drive/folders/1Y0oFXaD-HZcoAVqQZUtGH0rg0fSLA5LE?usp=sharing"><img class="text" src="/images/docs.svg"/><span class="text">/syntelos/science/</span></a></dd>
+       <dd class="text"><a class="text" href="https://drive.google.com/drive/folders/1OaTyuOezcbgCu433asC7dkqgCaYo_jAK?usp=sharing"><img class="text" src="/images/docs.svg"/><span class="text">/syntelos/science/computing</span></a></dd>
+       <dd class="text"><a class="text" href="https://drive.google.com/drive/folders/18Z2baXg9aClWlqw4nkRIfbjjX1g1OqhF?usp=sharing"><img class="text" src="/images/docs.svg"/><span class="text">/syntelos/science/anthropology</span></a></dd>
+
        <dt class="text"><a class="text" href="https://twitter.com/gegonen"><img class="text" src="/images/twitter.svg"/><span class="text">@gegonen</span></a></dt>
-       <dd class="text">
-         <dl class="text">
-           <dt class="text"><a class="text" href="https://drive.google.com/drive/folders/0B6GOamAybxHoLVhHZlZnbkFScU0?resourcekey=0-Qt341YI2Mz_YB4fF72l_vg&usp=sharing"><img class="text" src="/images/docs.svg"/><span class="text">/gegonen/</span></a></dt>
-           <dt class="text"><a class="text" href="https://drive.google.com/drive/folders/1mYOAPh7PoU9dQ88SDMUBBarhFML0r2FZ?usp=sharing"><img class="text" src="/images/docs.svg"/><span class="text">/gegonen/dictionary</span></a></dt>
-           <dt class="text"><a class="text" href="https://drive.google.com/drive/folders/1X3oEEIlaqh71kHo4OjTPw-6Hum8dDvUg?usp=sharing"><img class="text" src="/images/docs.svg"/><span class="text">/gegonen/kinographics</span></a></dt>
-           <dt class="text"><a class="text" href="https://drive.google.com/drive/folders/10hEEvo9mHb-tdAIUYgh_tSe6w3K0XT2T?usp=sharing"><img class="text" src="/images/docs.svg"/><span class="text">/gegonen/movements for social justice</span></a></dt>
-           <dt class="text"><a class="text" href="https://drive.google.com/drive/folders/1dx9k9MhZXANdPf5qT9bM6snEetfXGD9x?usp=sharing"><img class="text" src="/images/docs.svg"/><span class="text">/gegonen/television</span></a></dt>
-         </dl>
-       </dd>
+
+       <dd class="text"><a class="text" href="https://drive.google.com/drive/folders/0B6GOamAybxHoLVhHZlZnbkFScU0?resourcekey=0-Qt341YI2Mz_YB4fF72l_vg&usp=sharing"><img class="text" src="/images/docs.svg"/><span class="text">/gegonen/</span></a></dd>
+       <dd class="text"><a class="text" href="https://drive.google.com/drive/folders/1mYOAPh7PoU9dQ88SDMUBBarhFML0r2FZ?usp=sharing"><img class="text" src="/images/docs.svg"/><span class="text">/gegonen/dictionary</span></a></dd>
+       <dd class="text"><a class="text" href="https://drive.google.com/drive/folders/1X3oEEIlaqh71kHo4OjTPw-6Hum8dDvUg?usp=sharing"><img class="text" src="/images/docs.svg"/><span class="text">/gegonen/kinographics</span></a></dd>
+       <dd class="text"><a class="text" href="https://drive.google.com/drive/folders/10hEEvo9mHb-tdAIUYgh_tSe6w3K0XT2T?usp=sharing"><img class="text" src="/images/docs.svg"/><span class="text">/gegonen/movements for social justice</span></a></dd>
+       <dd class="text"><a class="text" href="https://drive.google.com/drive/folders/1dx9k9MhZXANdPf5qT9bM6snEetfXGD9x?usp=sharing"><img class="text" src="/images/docs.svg"/><span class="text">/gegonen/television</span></a></dd>
+
        <dt class="text"><a class="text" href="https://twitter.com/logexist"><img class="text" src="/images/twitter.svg"/><span class="text">@logexist</span></a></dt>
-       <dd class="text">
-         <dl class="text">
-           <dt class="text"><a class="text" href="https://drive.google.com/drive/folders/0B6GOamAybxHoWURYZTg4MXU1b28?resourcekey=0-x_cSP0ao_cgGCdWheM2KFw&usp=sharing"><img class="text" src="/images/docs.svg"/><span class="text">/logexist/</span></a></dt>
-           <dt class="text"><a class="text" href="https://github.com/syntelos/tex-logexist/"><img class="text" src="/images/github.svg"/><span class="text">/syntelos/tex-logexist/</span></a></dt>
-         </dl>
-       </dd>
+
+       <dd class="text"><a class="text" href="https://drive.google.com/drive/folders/0B6GOamAybxHoWURYZTg4MXU1b28?resourcekey=0-x_cSP0ao_cgGCdWheM2KFw&usp=sharing"><img class="text" src="/images/docs.svg"/><span class="text">/logexist/</span></a></dd>
+       <dd class="text"><a class="text" href="https://github.com/syntelos/tex-logexist/"><img class="text" src="/images/github.svg"/><span class="text">/syntelos/tex-logexist/</span></a></dd>
+
        <dt class="text"><a class="text" href="https://github.com/syntelos"><img class="text" src="/images/github.svg"/><span class="text">@syntelos</span></a></dt>
-       <dd class="text">
-         <dl class="text">
-           <dt class="text"><a class="text" href="https://github.com/syntelos/lang/"><img class="text" src="/images/github.svg"/><span class="text">/syntelos/lang</span></a></dt>
-           <dt class="text"><a class="text" href="https://github.com/syntelos/tex-reports/"><img class="text" src="/images/github.svg"/><span class="text">/syntelos/tex-reports</span></a></dt>
-         </dl>
-       </dd>
+
        <dt class="text"><a class="text" href="https://t.me/syntelos"><img class="text" src="/images/telegram.svg"/><span class="text">@syntelos</span></a></dt>
-       <dd class="text">
-         <dl class="text">
-           <dt class="text"><a class="text" href="https://t.me/syntelos_telegram/"><img class="text" src="/images/telegram.svg"/><span class="text">@syntelos_telegram</span></a></dt>
-         </dl>
-       </dd>
+       <dd class="text"><a class="text" href="https://t.me/syntelos_telegram/"><img class="text" src="/images/telegram.svg"/><span class="text">@syntelos_telegram</span></a></dd>
        <dt class="text"><a class="text" href="https://instagram.com/syntelos"><img class="text" src="/images/instagram.svg"/><span class="text">@syntelos</span></a></dt>
      </dl>
    </div>
