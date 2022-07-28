@@ -9,12 +9,16 @@
  */
 var recent_schedule = 10000;
 /*
- * YYYY catalog reference in "/recent/YYYY/YYYMMDD.json".
+ * YYYY catalog reference in "/recent/YYYY/MM/YYYMMDD.json".
  */
-var recent_catalog = '2022';
+var recent_catalog_year = '2022';
+/*
+ * MM catalog reference in "/recent/YYYY/MM/YYYMMDD.json".
+ */
+var recent_catalog_month = '07';
 /*
  * YYYYMMDD directory reference in
- * "/recent/YYYY/YYYMMDD.json".
+ * "/recent/YYYY/MM/YYYMMDD.json".
  */
 var recent_directory = null;
 /*
@@ -200,11 +204,11 @@ function recent_page_next (){
 }
 
 /*
- * <onchange> from <select#catalog>.
+ * <onchange> from <select#catalog_year>.
  */
-function recent_select_catalog(){
+function recent_select_catalog_year(){
 
-    var select = document.getElementById("catalog");
+    var select = document.getElementById("catalog_year");
     if (select.hasChildNodes()){
 
         var children = select.childNodes;
@@ -216,7 +220,32 @@ function recent_select_catalog(){
 
             if (option.selected && null != option.value && 4 == option.value.length){
 
-                recent_catalog = option.value;
+                recent_catalog_year = option.value;
+            }
+        }
+    }
+
+    recent_configure_catalog_month();
+}
+
+/*
+ * <onchange> from <select#catalog_month>.
+ */
+function recent_select_catalog_month(){
+
+    var select = document.getElementById("catalog_month");
+    if (select.hasChildNodes()){
+
+        var children = select.childNodes;
+        var count = children.length;
+        var index;
+        for (index = 0; index < count; index++){
+
+            var option = children.item(index);
+
+            if (option.selected && null != option.value && 2 == option.value.length){
+
+                recent_catalog_month = option.value;
             }
         }
     }
@@ -254,34 +283,40 @@ function recent_select_directory(){
  * Document body <onload>.
  */
 function recent_configure(){
-    /*
-     */
+
     if (null != document.location.hash && 9 == document.location.hash.length){
 
         recent_directory = document.location.hash.substring(1,9);
+        recent_catalog_year = recent_directory.substring(0,4);
+        recent_catalog_month = recent_directory.substring(4,6);
     }
-    /*
-     */
-    var catalog_loader = new XMLHttpRequest();
 
-    catalog_loader.open("GET","/recent/index.txt",true);
+    recent_configure_catalog_year();
 
-    catalog_loader.onload = function (e) {
+}
 
-        if (200 == catalog_loader.status && null != catalog_loader.responseText && 4 < catalog_loader.responseText.length){
+function recent_configure_catalog_year(){
+
+    var catalog_year_loader = new XMLHttpRequest();
+
+    catalog_year_loader.open("GET","/recent/index.txt",true);
+
+    catalog_year_loader.onload = function (e) {
+
+        if (200 == catalog_year_loader.status && null != catalog_year_loader.responseText && 4 < catalog_year_loader.responseText.length){
             /*
              */
-            var index_txt = catalog_loader.responseText;
+            var index_txt = catalog_year_loader.responseText;
             var index_ary = index_txt.split('\n');
 
-            if (null == recent_catalog){
+            if (null == recent_catalog_year){
 
-                recent_catalog = index_ary[0];
+                recent_catalog_year = index_ary[0];
             }
             /*
              */
-            var catalog = document.getElementById('catalog');
-            if (null != catalog){
+            var catalog_year = document.getElementById('catalog_year');
+            if (null != catalog_year){
 
                 var count = index_ary.length;
                 var index;
@@ -295,26 +330,84 @@ function recent_configure(){
                         option.value = index_value;
                         option.innerText = index_value;
 
-                        if (index_value == recent_catalog){
+                        if (index_value == recent_catalog_year){
 
                             option.selected = 'true';
                         }
 
-                        catalog.appendChild(option);
+                        catalog_year.appendChild(option);
                     }
                 }
 
-                catalog.onchange = recent_select_catalog;
+                catalog_year.onchange = recent_select_catalog_year;
+            }
+
+            recent_configure_catalog_month();
+        }
+    };
+    catalog_year_loader.send(null);
+
+}
+
+/*
+ * Second part of catalog configuration (month).
+ */
+function recent_configure_catalog_month(){
+
+    var catalog_month_loader = new XMLHttpRequest();
+
+    catalog_month_loader.open("GET","/recent/"+recent_catalog_year+"/index.txt",true);
+
+    catalog_month_loader.onload = function (e) {
+
+        if (200 == catalog_month_loader.status && null != catalog_month_loader.responseText && 2 < catalog_month_loader.responseText.length){
+            /*
+             */
+            var index_txt = catalog_month_loader.responseText;
+            var index_ary = index_txt.split('\n');
+
+            if (null == recent_catalog_month){
+
+                recent_catalog_month = index_ary[0];
+            }
+            /*
+             */
+            var catalog_month = document.getElementById('catalog_month');
+            if (null != catalog_month){
+
+                var count = index_ary.length;
+                var index;
+                for (index = 0; index < count; index++){
+
+                    var index_value = index_ary[index];
+                    if (2 == index_value.length){
+
+                        var option = document.createElement("option");
+                        option.className = 'text';
+                        option.value = index_value;
+                        option.innerText = index_value;
+
+                        if (index_value == recent_catalog_month){
+
+                            option.selected = 'true';
+                        }
+
+                        catalog_month.appendChild(option);
+                    }
+                }
+
+                catalog_month.onchange = recent_select_catalog_month;
             }
 
             recent_configure_directory();
         }
     };
-    catalog_loader.send(null);
+    catalog_month_loader.send(null);
+
 }
 
 /*
- * UX constructor called from body <onload> and catalog <select>.
+ * UX constructor called from body <onload> and catalog_year <select>.
  */
 function recent_configure_directory(){
 
@@ -336,7 +429,7 @@ function recent_configure_directory(){
 
     var directory_loader = new XMLHttpRequest();
 
-    directory_loader.open("GET","/recent/"+recent_catalog+"/index.txt",true);
+    directory_loader.open("GET","/recent/"+recent_catalog_year+'/'+recent_catalog_month+"/index.txt",true);
 
     directory_loader.onload = function (e) {
 
@@ -348,17 +441,6 @@ function recent_configure_directory(){
             if (null == recent_directory){
 
                 recent_directory = index_ary[0];
-            }
-
-            var selected = null;
-
-            if (null != recent_directory){
-
-                selected = recent_directory;
-            }
-            else if (0 < count){
-
-                selected = index_ary[0];
             }
 
             var count = index_ary.length;
@@ -373,19 +455,14 @@ function recent_configure_directory(){
                     option.value = index_value;
                     option.innerText = index_value;
 
-                    if (null != selected && selected == index_value){
+                    if (index_value == recent_directory){
 
                         option.selected = 'true';
-
-                        recent_directory = selected;
-
-                        document.location.hash = selected;
                     }
 
                     directory.appendChild(option);
                 }
             }
-
 
             directory.onchange = recent_select_directory;
 
@@ -418,11 +495,11 @@ function recent_configure_pages(){
         }
     }
 
-    if (null != recent_catalog && null != recent_directory){
+    if (null != recent_catalog_year && null != recent_catalog_month && null != recent_directory){
 
         var directory_loader = new XMLHttpRequest();
 
-        directory_loader.open("GET","/recent/"+recent_catalog+'/'+recent_directory+".json",true);
+        directory_loader.open("GET","/recent/"+recent_catalog_year+'/'+recent_catalog_month+'/'+recent_directory+".json",true);
 
         directory_loader.onload = function (e) {
 

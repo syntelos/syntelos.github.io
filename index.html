@@ -45,8 +45,11 @@
       padding: 12px;
      }
    }
-   select#catalog.configuration {
+   select#catalog_year.configuration {
     left: 2px;
+   }
+   select#catalog_month.configuration {
+    left: 78px;
    }
    select#directory.configuration {
     right: 2px;
@@ -130,7 +133,9 @@
  </head>
  <body onload="recent_configure()">
 
-   <select id="catalog" class="configuration text">
+   <select id="catalog_year" class="configuration text">
+   </select>
+   <select id="catalog_month" class="configuration text">
    </select>
    <select id="directory" class="configuration text">
    </select>
