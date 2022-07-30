@@ -3,6 +3,13 @@
         "id" : "page"
     },
     {
+        "id": "potus-20220730-0",
+        "icon": "twitter",
+        "path": "/syntelos /science /anthropology /cyber/",
+        "link": "https://drive.google.com/drive/folders/1TGjUizdIjT1kz5W8mtUbg0GfA7G1JDWp",
+        "embed": "https://drive.google.com/file/d/1Jcq1O_6XttBNgduRC_3MCp5BYefGumxt/preview"
+    },
+    {
         "id": "anthropology-20220730-0",
         "icon": "docs",
         "path": "/syntelos /science /anthropology/",
