@@ -11,11 +11,11 @@ var recent_schedule = 10000;
 /*
  * YYYY catalog reference in "/recent/YYYY/MM/YYYMMDD.json".
  */
-var recent_catalog_year = '2022';
+var recent_catalog_year = null;
 /*
  * MM catalog reference in "/recent/YYYY/MM/YYYMMDD.json".
  */
-var recent_catalog_month = '07';
+var recent_catalog_month = null;
 /*
  * YYYYMMDD directory reference in
  * "/recent/YYYY/MM/YYYMMDD.json".
@@ -295,6 +295,9 @@ function recent_configure(){
 
 }
 
+/*
+ * First part of catalog configuration from <onload>.
+ */
 function recent_configure_catalog_year(){
 
     var catalog_year_loader = new XMLHttpRequest();
@@ -350,7 +353,8 @@ function recent_configure_catalog_year(){
 }
 
 /*
- * Second part of catalog configuration (month).
+ * Second part of catalog configuration from <onload>, and
+ * <onchange> effect.
  */
 function recent_configure_catalog_month(){
 

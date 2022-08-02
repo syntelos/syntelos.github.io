@@ -1,0 +1,19 @@
+[
+    {
+        "id" : "page"
+    },
+    {
+        "id" : "sociology-20220802",
+        "icon" : "docs",
+        "path" : "/syntelos /science /anthropology /sociology/",
+        "link" : "https://drive.google.com/drive/folders/1etCIitYhVQH8_Wf6oHeu_rWUmDfTYZD-",
+        "embed" : "https://drive.google.com/file/d/1k8fM2_rEScKPPXOC6w6aFEWheAGVtrHi/preview"
+    },
+    {
+        "id" : "griner-20220802",
+        "icon": "earth",
+        "path" : "/syntelos /science /anthropology /sociology /russia /20220802/",
+        "link" : "https://drive.google.com/drive/folders/1k97CC1tg9z-MVAh2l-LBIZOV3_kLIdlB",
+        "embed" : "https://drive.google.com/file/d/1kGK_uhZFuLIpeo9f16Zey2ibDfJqmBaf/preview"
+    }
+]
