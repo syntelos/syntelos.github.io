@@ -511,113 +511,111 @@ function recent_configure_pages(){
         }
     }
 
-    if (null != recent_catalog_year && null != recent_catalog_month && null != recent_directory){
+    var pages_loader = new XMLHttpRequest();
 
-        var directory_loader = new XMLHttpRequest();
+    pages_loader.open("GET","/recent/"+recent_catalog_year+'/'+recent_catalog_month+'/'+recent_directory+".json",true);
 
-        directory_loader.open("GET","/recent/"+recent_catalog_year+'/'+recent_catalog_month+'/'+recent_directory+".json",true);
+    pages_loader.onload = function (e) {
 
-        directory_loader.onload = function (e) {
+        if (200 == pages_loader.status && null != pages_loader.responseText){
 
-            if (200 == directory_loader.status && null != directory_loader.responseText){
+            var directory = JSON.parse(pages_loader.responseText);
 
-                var directory = JSON.parse(directory_loader.responseText);
+            var children = document.body.childNodes;
+            var count = children.length;
+            var index;
+            var child;
 
-                var children = document.body.childNodes;
-                var count = children.length;
-                var index;
-                var child;
+            for (index = 0; index < count; index++){
 
-                for (index = 0; index < count; index++){
+                child = children.item(index);
 
-                    child = children.item(index);
+                if ("page text" == child.className){
 
-                    if ("page text" == child.className){
+                    if ("page" == child.id){
 
-                        if ("page" == child.id){
-
-                            child.style.visibility = 'visible';
-                        }
-                        else {
-
-                            child.style.visibility = 'hidden';
-                        }
+                        child.style.visibility = 'visible';
                     }
-                }
+                    else {
 
-                var count = directory.length;
-                var pg;
-                var div;
-
-                for (index = 0; index < count; index++){
-
-                    pg = directory[index];
-
-                    div = document.getElementById(pg.id);
-
-                    if (null == div){
-
-                        div = document.createElement("div");
-
-                        div.id = pg.id;
-                        div.className = 'page text';
-                        div.style.visibility = 'hidden';
-
-                        dl = document.createElement("dl");
-                        dl.className = 'recent';
-                        div.appendChild(dl);
-
-                        dt = document.createElement("dt");
-                        dt.className = 'recent';
-                        dl.appendChild(dt);
-
-                        if (pg.link && pg.path){
-
-                            a = document.createElement("a");
-                            a.className = 'text';
-                            a.href = pg.link;
-
-                            if (pg.icon){
-                                img = document.createElement("img");
-                                img.className  = 'text';
-                                img.src = '/images/'+pg.icon+'.svg';
-
-                                a.appendChild(img);
-                            }
-
-                            if (pg.path){
-                                txt = document.createElement("span");
-                                txt.className = 'text';
-                                txt.innerText = pg.path;
-
-                                a.appendChild(txt);
-                            }
-
-                            dt.appendChild(a);
-                        }
-
-                        dd = document.createElement("dd");
-                        dd.className = 'recent';
-                        dl.appendChild(dd);
-
-                        if (pg.embed){
-                            ifr = document.createElement("iframe");
-                            ifr.src = pg.embed;
-                            ifr.className = 'embed';
-
-                            dd.appendChild(ifr);
-                        }
-                        document.body.appendChild(div);
+                        child.style.visibility = 'hidden';
                     }
-
-                }
-
-                if (null == recent_paging_id){
-
-                    recent_paging_id = setInterval(recent_page_next,recent_schedule);
                 }
             }
-        };
-        directory_loader.send(null);
-    }
+
+            var count = directory.length;
+            var pg;
+            var div;
+
+            for (index = 0; index < count; index++){
+
+                pg = directory[index];
+
+                div = document.getElementById(pg.id);
+
+                if (null == div){
+
+                    div = document.createElement("div");
+
+                    div.id = pg.id;
+                    div.className = 'page text';
+                    div.style.visibility = 'hidden';
+
+                    dl = document.createElement("dl");
+                    dl.className = 'recent';
+                    div.appendChild(dl);
+
+                    dt = document.createElement("dt");
+                    dt.className = 'recent';
+                    dl.appendChild(dt);
+
+                    if (pg.link && pg.path){
+
+                        a = document.createElement("a");
+                        a.className = 'text';
+                        a.href = pg.link;
+
+                        if (pg.icon){
+                            img = document.createElement("img");
+                            img.className  = 'text';
+                            img.src = '/images/'+pg.icon+'.svg';
+
+                            a.appendChild(img);
+                        }
+
+                        if (pg.path){
+                            txt = document.createElement("span");
+                            txt.className = 'text';
+                            txt.innerText = pg.path;
+
+                            a.appendChild(txt);
+                        }
+
+                        dt.appendChild(a);
+                    }
+
+                    dd = document.createElement("dd");
+                    dd.className = 'recent';
+                    dl.appendChild(dd);
+
+                    if (pg.embed){
+                        ifr = document.createElement("iframe");
+                        ifr.src = pg.embed;
+                        ifr.className = 'embed';
+
+                        dd.appendChild(ifr);
+                    }
+                    document.body.appendChild(div);
+                }
+
+            }
+
+            if (null == recent_paging_id){
+
+                recent_paging_id = setInterval(recent_page_next,recent_schedule);
+            }
+        }
+    };
+    pages_loader.send(null);
+
 }
