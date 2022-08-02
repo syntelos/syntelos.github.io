@@ -221,6 +221,10 @@ function recent_select_catalog_year(){
             if (option.selected && null != option.value && 4 == option.value.length){
 
                 recent_catalog_year = option.value;
+
+                recent_catalog_month = null;
+
+                recent_directory = null;
             }
         }
     }
@@ -246,6 +250,8 @@ function recent_select_catalog_month(){
             if (option.selected && null != option.value && 2 == option.value.length){
 
                 recent_catalog_month = option.value;
+
+                recent_directory = null;
             }
         }
     }
@@ -315,6 +321,10 @@ function recent_configure_catalog_year(){
             if (null == recent_catalog_year){
 
                 recent_catalog_year = index_ary[0];
+
+                recent_catalog_month = null;
+
+                recent_directory = null;
             }
             /*
              */
@@ -373,6 +383,8 @@ function recent_configure_catalog_month(){
             if (null == recent_catalog_month){
 
                 recent_catalog_month = index_ary[0];
+
+                recent_directory = null;
             }
             /*
              */
