@@ -457,6 +457,8 @@ function recent_configure_directory(){
             if (null == recent_directory){
 
                 recent_directory = index_ary[0];
+
+                document.location.hash = recent_directory;
             }
 
             var count = index_ary.length;
