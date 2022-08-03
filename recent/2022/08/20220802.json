@@ -3,6 +3,13 @@
         "id" : "page"
     },
     {
+        "id" : "china-20220802",
+        "icon": "earth",
+        "path" : "/syntelos /science /anthropology /sociology /china /20220801/",
+        "link" : "https://drive.google.com/drive/folders/1fS-7rH3DIt2aNgIAJEgUoOgeL2myqDzj",
+        "embed" : "https://drive.google.com/file/d/1yz2-ctewuzHXUcBvy4MZcGPcc6ifThx6/preview"
+    },
+    {
         "id": "potus-20220802",
         "icon": "twitter",
         "path": "/syntelos /science /anthropology /cyber/",
