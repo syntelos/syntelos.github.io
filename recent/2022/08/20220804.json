@@ -1,0 +1,40 @@
+[
+    {
+        "id" : "page"
+    },
+    {
+        "id" : "government-20220804",
+        "icon" : "docs",
+        "path" : "/gegonen /government/",
+        "link" : "https://drive.google.com/drive/folders/1yu40JKyH82yPLmdl566SG3sZtoTjzyu2",
+        "embed" : "https://drive.google.com/file/d/1mNxqpslZYTssvmxLLoW5UbbwCGFbYq6i/preview"
+    },
+    {
+        "id" : "china-20220802",
+        "icon": "earth",
+        "path" : "/syntelos /science /anthropology /sociology /china /20220801/",
+        "link" : "https://drive.google.com/drive/folders/1fS-7rH3DIt2aNgIAJEgUoOgeL2myqDzj",
+        "embed" : "https://drive.google.com/file/d/1yz2-ctewuzHXUcBvy4MZcGPcc6ifThx6/preview"
+    },
+    {
+        "id": "potus-20220802",
+        "icon": "twitter",
+        "path": "/syntelos /science /anthropology /cyber/",
+        "link": "https://drive.google.com/drive/folders/1TGjUizdIjT1kz5W8mtUbg0GfA7G1JDWp",
+        "embed": "https://drive.google.com/file/d/1leaDYuvZwvVdrI_NrNLRPIsiNf0lSmws/preview"
+    },
+    {
+        "id" : "sociology-20220802",
+        "icon" : "docs",
+        "path" : "/syntelos /science /anthropology /sociology/",
+        "link" : "https://drive.google.com/drive/folders/1etCIitYhVQH8_Wf6oHeu_rWUmDfTYZD-",
+        "embed" : "https://drive.google.com/file/d/1k8fM2_rEScKPPXOC6w6aFEWheAGVtrHi/preview"
+    },
+    {
+        "id" : "griner-20220802",
+        "icon": "earth",
+        "path" : "/syntelos /science /anthropology /sociology /russia /20220802/",
+        "link" : "https://drive.google.com/drive/folders/1k97CC1tg9z-MVAh2l-LBIZOV3_kLIdlB",
+        "embed" : "https://drive.google.com/file/d/1kGK_uhZFuLIpeo9f16Zey2ibDfJqmBaf/preview"
+    }
+]
