@@ -27,7 +27,7 @@ var recent_directory = null;
 var recent_paging_id = null;
 
 /*
- * UX display navigation
+ * <svg#left.navigation:onclick> [UX display navigation]
  */
 function recent_nav_left (){
 
@@ -40,25 +40,46 @@ function recent_nav_left (){
 }
 
 /*
- * UX display navigation
+ * <svg#recycle.navigation:onclick> [UX display navigation]
  */
 function recent_nav_recycle (){
 
     if (recent_paging_id){
+
         clearInterval(recent_paging_id);
+
         recent_paging_id = null;
+
+        {
+            var svg_circle = document.getElementById('recycle_circle');
+            var svg_rect = document.getElementById('recycle_rect');
+
+            if (svg_circle && svg_rect){
+                svg_circle.style.visibility = 'hidden';
+                svg_rect.style.visibility = 'visible';
+            }
+        }
     }
+    else {
 
-    recent_page_begin();
-
-    if (null == recent_paging_id){
+        recent_page_begin();
 
         recent_paging_id = setInterval(recent_page_next,recent_schedule);
+
+        {
+            var svg_circle = document.getElementById('recycle_circle');
+            var svg_rect = document.getElementById('recycle_rect');
+
+            if (svg_circle && svg_rect){
+                svg_circle.style.visibility = 'visible';
+                svg_rect.style.visibility = 'hidden';
+            }
+        }
     }
 }
 
 /*
- * UX display navigation
+ * <svg#right.navigation:onclick> [UX display navigation]
  */
 function recent_nav_right (){
 

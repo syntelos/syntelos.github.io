@@ -130,8 +130,14 @@
      <path fill="none" stroke-width="20" stroke="#0066b3" d="M 70 20 L 30 50 L 70 80" />
    </svg>
    <svg id="recycle" class="navigation text"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" version="1.1" onclick="recent_nav_recycle()">
-     <circle fill="none" stroke="#0066b3" stroke-width="50" cx="150" cy="150" r="100"/>
-     <circle fill="#0066b3" stroke="none" cx="150" cy="150" r="30"/>
+     <g id="recycle_circle" style="visibility: visible">
+       <circle fill="none" stroke="#0066b3" stroke-width="50" cx="150" cy="150" r="100"/>
+       <circle fill="#0066b3" stroke="none" cx="150" cy="150" r="30"/>
+     </g>
+     <g id="recycle_rect" style="visibility: hidden">
+       <rect fill="none" stroke="#0066b3" stroke-width="50" x="50" y="50" width="200" height="200"/>
+       <rect fill="#0066b3" stroke="none" x="120" y="120" width="60" height="60"/>
+     </g>
    </svg>
    <svg id="right" class="navigation text" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" onclick="recent_nav_right()">
      <path fill="none" stroke-width="20" stroke="#0066b3" d="M 30 20 L 70 50 L 30 80" />
