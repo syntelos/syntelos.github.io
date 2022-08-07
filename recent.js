@@ -31,18 +31,56 @@ var recent_paging_id = null;
  */
 function recent_nav_left (){
 
-    if (recent_paging_id){
-        clearInterval(recent_paging_id);
-        recent_paging_id = null;
-    }
-
     recent_page_prev();
 }
-
 /*
  * <svg#recycle.navigation:onclick> [UX display navigation]
  */
 function recent_nav_recycle (){
+
+    if (recent_paging_id){
+
+        recent_page_manual();
+    }
+    else {
+
+        recent_page_begin();
+
+        recent_page_automatic();
+    }
+}
+/*
+ * <svg#right.navigation:onclick> [UX display navigation]
+ */
+function recent_nav_right (){
+
+    recent_page_next();
+}
+
+/*
+ * UX display paging
+ */
+function recent_page_automatic(){
+
+    if (! recent_paging_id){
+
+        recent_paging_id = setInterval(recent_page_next,recent_schedule);
+
+        {
+            var svg_circle = document.getElementById('recycle_circle');
+            var svg_rect = document.getElementById('recycle_rect');
+
+            if (svg_circle && svg_rect){
+                svg_circle.style.visibility = 'visible';
+                svg_rect.style.visibility = 'hidden';
+            }
+        }
+    }
+}
+/*
+ * UX display paging
+ */
+function recent_page_manual(){
 
     if (recent_paging_id){
 
@@ -60,41 +98,13 @@ function recent_nav_recycle (){
             }
         }
     }
-    else {
-
-        recent_page_begin();
-
-        recent_paging_id = setInterval(recent_page_next,recent_schedule);
-
-        {
-            var svg_circle = document.getElementById('recycle_circle');
-            var svg_rect = document.getElementById('recycle_rect');
-
-            if (svg_circle && svg_rect){
-                svg_circle.style.visibility = 'visible';
-                svg_rect.style.visibility = 'hidden';
-            }
-        }
-    }
 }
-
-/*
- * <svg#right.navigation:onclick> [UX display navigation]
- */
-function recent_nav_right (){
-
-    if (recent_paging_id){
-        clearInterval(recent_paging_id);
-        recent_paging_id = null;
-    }
-
-    recent_page_next();
-}
-
 /*
  * UX display paging
  */
 function recent_page_prev (){
+
+    recent_page_manual();
 
     var prev = false;
 
@@ -174,6 +184,8 @@ function recent_page_begin (){
  * UX display paging
  */
 function recent_page_next (){
+
+    recent_page_manual();
 
     var next = false;
 
