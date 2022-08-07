@@ -329,11 +329,13 @@ function recent_configure_catalog_year(){
 
     var catalog_year_loader = new XMLHttpRequest();
 
-    catalog_year_loader.open("GET","/recent/index.txt",true);
+    catalog_year_loader.open("GET","/recent/index.txt",false);
 
     catalog_year_loader.onload = function (e) {
 
-        if (200 == catalog_year_loader.status && null != catalog_year_loader.responseText && 4 < catalog_year_loader.responseText.length){
+        if (4 == catalog_year_loader.readyState && 200 == catalog_year_loader.status &&
+            null != catalog_year_loader.responseText && 4 < catalog_year_loader.responseText.length)
+        {
             /*
              */
             var index_txt = catalog_year_loader.responseText;
@@ -391,11 +393,13 @@ function recent_configure_catalog_month(){
 
     var catalog_month_loader = new XMLHttpRequest();
 
-    catalog_month_loader.open("GET","/recent/"+recent_catalog_year+"/index.txt",true);
+    catalog_month_loader.open("GET","/recent/"+recent_catalog_year+"/index.txt",false);
 
     catalog_month_loader.onload = function (e) {
 
-        if (200 == catalog_month_loader.status && null != catalog_month_loader.responseText && 2 < catalog_month_loader.responseText.length){
+        if (4 == catalog_month_loader.readyState && 200 == catalog_month_loader.status &&
+            null != catalog_month_loader.responseText && 2 < catalog_month_loader.responseText.length)
+        {
             /*
              */
             var index_txt = catalog_month_loader.responseText;
@@ -466,12 +470,13 @@ function recent_configure_directory(){
 
     var directory_loader = new XMLHttpRequest();
 
-    directory_loader.open("GET","/recent/"+recent_catalog_year+'/'+recent_catalog_month+"/index.txt",true);
+    directory_loader.open("GET","/recent/"+recent_catalog_year+'/'+recent_catalog_month+"/index.txt",false);
 
     directory_loader.onload = function (e) {
 
-        if (200 == directory_loader.status && null != directory_loader.responseText && 8 < directory_loader.responseText.length){
-
+        if (4 == directory_loader.readyState && 200 == directory_loader.status &&
+            null != directory_loader.responseText && 8 < directory_loader.responseText.length)
+        {
             var index_txt = directory_loader.responseText;
             var index_ary = index_txt.split('\n');
 
@@ -536,12 +541,13 @@ function recent_configure_pages(){
 
     var pages_loader = new XMLHttpRequest();
 
-    pages_loader.open("GET","/recent/"+recent_catalog_year+'/'+recent_catalog_month+'/'+recent_directory+".json",true);
+    pages_loader.open("GET","/recent/"+recent_catalog_year+'/'+recent_catalog_month+'/'+recent_directory+".json",false);
 
     pages_loader.onload = function (e) {
 
-        if (200 == pages_loader.status && null != pages_loader.responseText){
-
+        if (4 == pages_loader.readyState && 200 == pages_loader.status &&
+            null != pages_loader.responseText)
+        {
             var directory = JSON.parse(pages_loader.responseText);
 
             var children = document.body.childNodes;
