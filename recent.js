@@ -31,6 +31,8 @@ var recent_paging_id = null;
  */
 function recent_nav_left (){
 
+    recent_page_manual();
+
     recent_page_prev();
 }
 /*
@@ -53,6 +55,8 @@ function recent_nav_recycle (){
  * <svg#right.navigation:onclick> [UX display navigation]
  */
 function recent_nav_right (){
+
+    recent_page_manual();
 
     recent_page_next();
 }
@@ -103,8 +107,6 @@ function recent_page_manual(){
  * UX display paging
  */
 function recent_page_prev (){
-
-    recent_page_manual();
 
     var prev = false;
 
@@ -184,8 +186,6 @@ function recent_page_begin (){
  * UX display paging
  */
 function recent_page_next (){
-
-    recent_page_manual();
 
     var next = false;
 
