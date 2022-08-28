@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/MarkUp/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+ <head>
+  <title>Syntelos</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <style type="text/css">
+   body {
+    margin: 0;
+    padding: 0;
+    background: #efefef;
+    color: #ffffff;
+    font-family: verdana, helvetica, sans-serif;
+    background-image: url("/images/syntelos-logo.svg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: 10% 10%;
+   }
+   div.page {
+    display: block;
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    width: 600px;
+    height: 600px;
+    background-color: #ffffffa5;
+    margin: 0;
+    padding: 12px;
+    z-index: 2;
+    vertical-align: middle;
+   }
+   select.configuration {
+    display: block;
+    position: absolute;
+    top: 2px;
+    margin: 0;
+    padding: 6px;
+    background-color: #ffffffa5;
+    border: 1px solid #d0d0d0;
+    z-index: 3;
+    cursor: pointer;
+   }
+   select#catalog_volume.configuration {
+    left: 2px;
+   }
+   select#catalog_year.configuration {
+    left: 110px;
+   }
+   select#catalog_month.configuration {
+    left: 185px;
+   }
+   select#directory.configuration {
+    right: 2px;
+   }
+   svg.navigation {
+    display: block;
+    position: fixed;
+    bottom: 2px;
+    width: 32px;
+    height: 32px;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffffa5;
+    border: 1px solid #d0d0d0;
+    z-index: 3;
+    cursor: pointer;
+   }
+   svg#left.navigation {
+    left: 2px;
+   }
+   svg#recycle.navigation {
+    left: calc(50% - 16px);
+   }
+   svg#right.navigation {
+    right: 2px;
+   }
+   .text {
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 18px;
+    color: #0066b3;
+    text-decoration: none;
+    vertical-align: middle;
+   }
+   dt.text {
+    height: 32px;
+   }
+   dd.text {
+    height: 32px;
+   }
+   dt.catalog {
+    height: 50px;
+   }
+   img.text {
+    display: inline;
+    width: 18px;
+    height: 18px;
+    margin: 3px;
+   }
+   iframe.embed {
+     width: 500px;
+     height: 500px;
+     margin: 6px;
+     padding: 6px;
+   }
+   a.text {
+    color: #0066b3;
+    text-decoration: none;
+   }
+   a:link {
+    color: #0066b3;
+   }
+   a:visited {
+    color: #0066b3;
+   }
+   a:hover {
+    color: #00A0F0;
+   }
+  </style>
+  <script language="javascript" src="/catalog.js">
+  </script>
+ </head>
+ <body onload="catalog_configure()">
+
+   <select id="catalog_volume" class="configuration text">
+   </select>
+   <select id="catalog_year" class="configuration text">
+   </select>
+   <select id="catalog_month" class="configuration text">
+   </select>
+   <select id="directory" class="configuration text">
+   </select>
+
+   <svg id="left" class="navigation text" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" onclick="catalog_nav_left()">
+     <path fill="none" stroke-width="20" stroke="#0066b3" d="M 70 20 L 30 50 L 70 80" />
+   </svg>
+   <svg id="recycle" class="navigation text"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" version="1.1" onclick="catalog_nav_recycle()">
+     <g id="recycle_circle" style="visibility: visible">
+       <circle fill="none" stroke="#0066b3" stroke-width="50" cx="150" cy="150" r="100"/>
+       <circle fill="#0066b3" stroke="none" cx="150" cy="150" r="30"/>
+     </g>
+     <g id="recycle_rect" style="visibility: hidden">
+       <rect fill="none" stroke="#0066b3" stroke-width="50" x="50" y="50" width="200" height="200"/>
+       <rect fill="#0066b3" stroke="none" x="120" y="120" width="60" height="60"/>
+     </g>
+   </svg>
+   <svg id="right" class="navigation text" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" onclick="catalog_nav_right()">
+     <path fill="none" stroke-width="20" stroke="#0066b3" d="M 30 20 L 70 50 L 30 80" />
+   </svg>
+
+   <div id="page" class="page text">
+     <dl class="text">
+       <dt class="text"><a class="text" href="https://twitter.com/syntelos"><img class="text" src="/images/twitter.svg"/><span class="text">@syntelos</span></a></dt>
+
+       <dd class="text"><a class="text" href="https://drive.google.com/drive/folders/1185Tifv9VeoG8E0DGC6qUGPt0JdA8e2k?usp=sharing"><img class="text" src="/images/docs.svg"/><span class="text">/syntelos/</span></a></dd>
+       <dd class="text"><a class="text" href="https://drive.google.com/drive/folders/1Y0oFXaD-HZcoAVqQZUtGH0rg0fSLA5LE?usp=sharing"><img class="text" src="/images/docs.svg"/><span class="text">/syntelos/science/</span></a></dd>
+       <dd class="text"><a class="text" href="https://drive.google.com/drive/folders/1OaTyuOezcbgCu433asC7dkqgCaYo_jAK?usp=sharing"><img class="text" src="/images/docs.svg"/><span class="text">/syntelos/science/computing</span></a></dd>
+       <dd class="text"><a class="text" href="https://drive.google.com/drive/folders/18Z2baXg9aClWlqw4nkRIfbjjX1g1OqhF?usp=sharing"><img class="text" src="/images/docs.svg"/><span class="text">/syntelos/science/anthropology</span></a></dd>
+
+       <dt class="text"><a class="text" href="https://twitter.com/gegonen"><img class="text" src="/images/twitter.svg"/><span class="text">@gegonen</span></a></dt>
+
+       <dd class="text"><a class="text" href="https://drive.google.com/drive/folders/0B6GOamAybxHoLVhHZlZnbkFScU0?resourcekey=0-Qt341YI2Mz_YB4fF72l_vg&usp=sharing"><img class="text" src="/images/docs.svg"/><span class="text">/gegonen/</span></a></dd>
+       <dd class="text"><a class="text" href="https://drive.google.com/drive/folders/1mYOAPh7PoU9dQ88SDMUBBarhFML0r2FZ?usp=sharing"><img class="text" src="/images/docs.svg"/><span class="text">/gegonen/dictionary</span></a></dd>
+       <dd class="text"><a class="text" href="https://drive.google.com/drive/folders/1X3oEEIlaqh71kHo4OjTPw-6Hum8dDvUg?usp=sharing"><img class="text" src="/images/docs.svg"/><span class="text">/gegonen/kinographics</span></a></dd>
+       <dd class="text"><a class="text" href="https://drive.google.com/drive/folders/10hEEvo9mHb-tdAIUYgh_tSe6w3K0XT2T?usp=sharing"><img class="text" src="/images/docs.svg"/><span class="text">/gegonen/movements for social justice</span></a></dd>
+       <dd class="text"><a class="text" href="https://drive.google.com/drive/folders/1dx9k9MhZXANdPf5qT9bM6snEetfXGD9x?usp=sharing"><img class="text" src="/images/docs.svg"/><span class="text">/gegonen/television</span></a></dd>
+
+       <dt class="text"><a class="text" href="https://twitter.com/logexist"><img class="text" src="/images/twitter.svg"/><span class="text">@logexist</span></a></dt>
+
+       <dd class="text"><a class="text" href="https://drive.google.com/drive/folders/0B6GOamAybxHoWURYZTg4MXU1b28?resourcekey=0-x_cSP0ao_cgGCdWheM2KFw&usp=sharing"><img class="text" src="/images/docs.svg"/><span class="text">/logexist/</span></a></dd>
+       <dd class="text"><a class="text" href="https://github.com/syntelos/tex-logexist/"><img class="text" src="/images/github.svg"/><span class="text">/syntelos/tex-logexist/</span></a></dd>
+
+       <dt class="text"><a class="text" href="https://github.com/syntelos"><img class="text" src="/images/github.svg"/><span class="text">@syntelos</span></a></dt>
+
+       <dt class="text"><a class="text" href="https://t.me/syntelos"><img class="text" src="/images/telegram.svg"/><span class="text">@syntelos</span></a></dt>
+       <dd class="text"><a class="text" href="https://t.me/syntelos_telegram/"><img class="text" src="/images/telegram.svg"/><span class="text">@syntelos_telegram</span></a></dd>
+       <dt class="text"><a class="text" href="https://instagram.com/syntelos"><img class="text" src="/images/instagram.svg"/><span class="text">@syntelos</span></a></dt>
+     </dl>
+   </div>
+
+ </body>
+</html>
