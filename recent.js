@@ -363,8 +363,8 @@ function recent_configure_catalog_year(){
             }
             /*
              */
-            var catalog_year = document.getElementById('catalog_year');
-            if (null != catalog_year){
+            var select = document.getElementById('catalog_year');
+            if (null != select){
 
                 var count = index_ary.length;
                 var index;
@@ -383,11 +383,11 @@ function recent_configure_catalog_year(){
                             option.selected = 'true';
                         }
 
-                        catalog_year.appendChild(option);
+                        select.appendChild(option);
                     }
                 }
 
-                catalog_year.onchange = recent_select_catalog_year;
+                select.onchange = recent_select_catalog_year;
             }
 
             recent_configure_catalog_month();
@@ -425,8 +425,8 @@ function recent_configure_catalog_month(){
             }
             /*
              */
-            var catalog_month = document.getElementById('catalog_month');
-            if (null != catalog_month){
+            var select = document.getElementById('catalog_month');
+            if (null != select){
 
                 var count = index_ary.length;
                 var index;
@@ -445,11 +445,11 @@ function recent_configure_catalog_month(){
                             option.selected = 'true';
                         }
 
-                        catalog_month.appendChild(option);
+                        select.appendChild(option);
                     }
                 }
 
-                catalog_month.onchange = recent_select_catalog_month;
+                select.onchange = recent_select_catalog_month;
             }
 
             recent_configure_directory();
@@ -464,10 +464,10 @@ function recent_configure_catalog_month(){
  */
 function recent_configure_directory(){
 
-    var directory = document.getElementById('directory');
-    if (null != directory){
+    var select = document.getElementById('directory');
+    if (null != select){
 
-        var children = directory.childNodes;
+        var children = select.childNodes;
         var count = children.length;
         var index;
         var child;
@@ -476,7 +476,7 @@ function recent_configure_directory(){
 
             child = children.item(index);
 
-            directory.removeChild(child);
+            select.removeChild(child);
         }
     }
 
@@ -516,11 +516,11 @@ function recent_configure_directory(){
                         option.selected = 'true';
                     }
 
-                    directory.appendChild(option);
+                    select.appendChild(option);
                 }
             }
 
-            directory.onchange = recent_select_directory;
+            select.onchange = recent_select_directory;
 
             recent_configure_pages();
         }
