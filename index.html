@@ -40,11 +40,14 @@
     z-index: 3;
     cursor: pointer;
    }
-   select#catalog_year.configuration {
+   select#catalog_volume.configuration {
     left: 2px;
    }
+   select#catalog_year.configuration {
+    left: 110px;
+   }
    select#catalog_month.configuration {
-    left: 78px;
+    left: 185px;
    }
    select#directory.configuration {
     right: 2px;
@@ -85,7 +88,7 @@
    dd.text {
     height: 32px;
    }
-   dt.recent {
+   dt.catalog {
     height: 50px;
    }
    img.text {
@@ -114,11 +117,13 @@
     color: #00A0F0;
    }
   </style>
-  <script language="javascript" src="/recent.js">
+  <script language="javascript" src="/catalog.js">
   </script>
  </head>
- <body onload="recent_configure()">
+ <body onload="catalog_configure()">
 
+   <select id="catalog_volume" class="configuration text">
+   </select>
    <select id="catalog_year" class="configuration text">
    </select>
    <select id="catalog_month" class="configuration text">
@@ -126,10 +131,10 @@
    <select id="directory" class="configuration text">
    </select>
 
-   <svg id="left" class="navigation text" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" onclick="recent_nav_left()">
+   <svg id="left" class="navigation text" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" onclick="catalog_nav_left()">
      <path fill="none" stroke-width="20" stroke="#0066b3" d="M 70 20 L 30 50 L 70 80" />
    </svg>
-   <svg id="recycle" class="navigation text"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" version="1.1" onclick="recent_nav_recycle()">
+   <svg id="recycle" class="navigation text"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" version="1.1" onclick="catalog_nav_recycle()">
      <g id="recycle_circle" style="visibility: visible">
        <circle fill="none" stroke="#0066b3" stroke-width="50" cx="150" cy="150" r="100"/>
        <circle fill="#0066b3" stroke="none" cx="150" cy="150" r="30"/>
@@ -139,7 +144,7 @@
        <rect fill="#0066b3" stroke="none" x="120" y="120" width="60" height="60"/>
      </g>
    </svg>
-   <svg id="right" class="navigation text" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" onclick="recent_nav_right()">
+   <svg id="right" class="navigation text" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" onclick="catalog_nav_right()">
      <path fill="none" stroke-width="20" stroke="#0066b3" d="M 30 20 L 70 50 L 30 80" />
    </svg>
 
