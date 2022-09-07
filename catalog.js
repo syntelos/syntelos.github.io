@@ -349,6 +349,10 @@ function catalog_select_directory(){
 
                     document.location.hash = option.value;
                 }
+                else {
+
+                    document.location.hash = '';
+                }
             }
         }
     }
@@ -637,6 +641,10 @@ function catalog_configure_directory(){
                 if ('recent' == catalog_volume){
 
                     document.location.hash = catalog_directory;
+                }
+                else {
+
+                    document.location.hash = '';
                 }
             }
 
