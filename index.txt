@@ -1,3 +1,4 @@
 recent
 twitter
 bookmarks
+collections

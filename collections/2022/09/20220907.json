@@ -1,0 +1,37 @@
+[
+    {
+        "id": "la_vie_en_rose",
+        "icon": "twitter",
+        "path": "@syntelos/collections/la_vie_en_rose",
+        "link": "https://twitter.com/syntelos/timelines/1004134239678365696",
+        "embed": "/collections/2022/09/la_vie_en_rose.html"
+    },
+    {
+        "id": "law",
+        "icon": "twitter",
+        "path": "@syntelos/collections/law",
+        "link": "https://twitter.com/syntelos/timelines/968153418127769600",
+        "embed": "/collections/2022/09/law.html"
+    },
+    {
+        "id": "politics",
+        "icon": "twitter",
+        "path": "@syntelos/collections/politics",
+        "link": "https://twitter.com/syntelos/timelines/968145364527341568",
+        "embed": "/collections/2022/09/politics.html"
+    },
+    {
+        "id": "satire",
+        "icon": "twitter",
+        "path": "@syntelos/collections/satire",
+        "link": "https://twitter.com/syntelos/timelines/968154643208572928",
+        "embed": "/collections/2022/09/satire.html"
+    },
+    {
+        "id": "subterfuge",
+        "icon": "twitter",
+        "path": "@syntelos/collections/subterfuge",
+        "link": "https://twitter.com/syntelos/timelines/968155209464713218",
+        "embed": "/collections/2022/09/subterfuge.html"
+    }
+]
