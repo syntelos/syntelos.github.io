@@ -25,25 +25,45 @@ function collection_onload(){
 
     var collection = document.getElementById('collection');
 
-    {
-        var yyyy = document.createElement('li');
+    var loader = new XMLHttpRequest();
 
-        yyyy.innerText = collection_yyyy
+    loader.open("GET","/collections/"+collection_name+".txt",false);
+    loader.onload = function (e){
 
-        collection.appendChild(yyyy);
-    }
-    {
-        var mm = document.createElement('li');
+        if (4 == loader.readyState && 200 == loader.status &&
+            null != loader.responseText)
+        {
+            var index_txt = loader.responseText;
+            var index_ary = index_txt.split('\n');
+            var index_cnt = index_ary.length;
+            var index;
+            for (index = 0; index < index_cnt; index++){
 
-        mm.innerText = collection_mm
+                var index_record = index_ary[index].split('\t');
 
-        collection.appendChild(mm);
-    }
-    {
-        var name = document.createElement('li');
+                    try {
+                        var tweet_id = new URL(index_record[0]);
+                        var tweet_url = new URL(index_record[1]);
 
-        name.innerText = collection_name
+                        var tweet_path = tweet_url.pathname.split('/');
+                        var tweet_poster = tweet_path[1];
+                        var tweet_id = tweet_path[3];
 
-        collection.appendChild(name);
-    }
+                        var twel_li = document.createElement('li');
+                        {
+                            twel_li.id = (tweet_poster+'-'+tweet_id);
+
+                            collection.appendChild(twel_li);
+                        }
+
+
+                    }
+                    catch (x){
+                        console.error(x);
+                    }
+                }
+            }
+        }
+    };
+    loader.send();
 }
