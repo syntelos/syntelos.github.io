@@ -17,23 +17,11 @@ var collection_name = null;
  */
 function collection_onload(){
     /*
-     * Initialization
-     */
-    {
         var path = document.location.pathname.split('/');
 
         collection_yyyy = path[2];
         collection_mm = path[3];
         collection_name = path[4].split('.')[0];
-    }
-    /*
-     * Decoration
+
      */
-    {
-        var script = document.createElement('script');
-        {
-            script.src = "https://platform.twitter.com/widgets.js";
-        }
-        document.body.appendChild(script);
-    }
 }
