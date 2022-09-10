@@ -21,7 +21,7 @@ then
                         for month in $(egrep -v '^#' 'index.txt')
                         do
 
-                            if 1>/dev/null pushd ${month} && ls *.json | sed 's%\.json%%;' | sort -rV > index.txt
+                            if 1>/dev/null pushd ${month} && 2>/dev/null ls *.json | sed 's%\.json%%;' | sort -rV > index.txt
                             then
                                 git add index.txt
 
