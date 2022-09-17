@@ -1,0 +1,44 @@
+[
+    {
+        "id": "sadopopulism",
+        "icon": "twitter",
+        "path": "@syntelos/collections/sadopopulism",
+        "link": "/collections/2022/09/sadopopulism.html",
+        "embed": "/collections/2022/09/sadopopulism.html"
+    },
+    {
+        "id": "la_vie_en_rose",
+        "icon": "twitter",
+        "path": "@syntelos/collections/la_vie_en_rose",
+        "link": "/collections/2022/09/la_vie_en_rose.html",
+        "embed": "/collections/2022/09/la_vie_en_rose.html"
+    },
+    {
+        "id": "law",
+        "icon": "twitter",
+        "path": "@syntelos/collections/law",
+        "link": "/collections/2022/09/law.html",
+        "embed": "/collections/2022/09/law.html"
+    },
+    {
+        "id": "politics",
+        "icon": "twitter",
+        "path": "@syntelos/collections/politics",
+        "link": "/collections/2022/09/politics.html",
+        "embed": "/collections/2022/09/politics.html"
+    },
+    {
+        "id": "satire",
+        "icon": "twitter",
+        "path": "@syntelos/collections/satire",
+        "link": "/collections/2022/09/satire.html",
+        "embed": "/collections/2022/09/satire.html"
+    },
+    {
+        "id": "subterfuge",
+        "icon": "twitter",
+        "path": "@syntelos/collections/subterfuge",
+        "link": "/collections/2022/09/subterfuge.html",
+        "embed": "/collections/2022/09/subterfuge.html"
+    }
+]
