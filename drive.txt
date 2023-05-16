@@ -1,0 +1,7 @@
+#
+# google drive resource keys are public
+# https://support.google.com/a/answer/10685032?hl=en
+#
+syntelos	https://drive.google.com/drive/folders/1185Tifv9VeoG8E0DGC6qUGPt0JdA8e2k?usp=share_link
+gegonen	https://drive.google.com/drive/folders/0B6GOamAybxHoLVhHZlZnbkFScU0?resourcekey=0-Qt341YI2Mz_YB4fF72l_vg&usp=share_link
+logexist	https://drive.google.com/drive/folders/0B6GOamAybxHoWURYZTg4MXU1b28?resourcekey=0-x_cSP0ao_cgGCdWheM2KFw&usp=share_link
