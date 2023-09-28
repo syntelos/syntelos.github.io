@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
+              "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="8.21111in" height="8.21111in"
+     viewBox="0 0 739 739">
+  <metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+    <rdf:RDF>
+      <cc:Work>
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+        <dc:source rdf:resource="https://www.youtube.com/howyoutubeworks/resources/brand-resources/#logos-icons-and-colors"/>
+	<dc:source rdf:resource="https://en.m.wikipedia.org/wiki/File:YouTube_Logo_2017.svg"/>
+        <dc:source rdf:resource="https://www.syntelos.io/images/youtube.svg"/>
+        <dc:license rdf:resource="https://creativecommons.org/licenses/by-nc/4.0/" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <path fill="#F00" stroke="none"
+        d="M 718.14,192.96
+           C 709.69,161.47 684.87,136.72 653.30,128.29
+             596.12,113.00 366.74,113.00 366.74,113.00
+             366.74,113.00 137.36,113.00 80.18,128.29
+             48.60,136.72 23.79,161.47 15.34,192.96
+             0.00,249.97 0.00,369.00 0.00,369.00
+             0.00,369.00 0.00,488.03 15.34,545.05
+             23.79,576.53 48.60,601.28 80.18,609.71
+             137.36,625.00 366.74,625.00 366.74,625.00
+             366.74,625.00 596.12,625.00 653.30,609.71
+             684.87,601.28 709.69,576.53 718.14,545.05
+             733.48,488.03 733.48,369.00 733.48,369.00
+             733.48,369.00 733.42,249.97 718.14,192.96 Z" />
+  <path fill="#FFF" stroke="none"
+        d="M 293.32,478.71
+           C 293.32,478.71 483.88,369.01 483.88,369.01
+             483.88,369.01 293.32,259.31 293.32,259.31
+             293.32,259.31 293.32,478.71 293.32,478.71 Z" />
+</svg>
