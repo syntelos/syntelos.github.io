@@ -2,9 +2,9 @@
 
 if [ -f index.txt ]
 then
-    for dir in $(egrep -v '^#' index.txt)
+    for volume in $(egrep -v '^#' index.txt)
     do
-       if 1>/dev/null pushd ${dir}
+       if 1>/dev/null pushd ${volume}
         then
 
             if ls | egrep -e '^[0-9][0-9][0-9][0-9]$' | sort -rV > index.txt
@@ -62,7 +62,7 @@ EOF
 
        1>/dev/null popd
 
-       wc -l $(find ${dir} -type f -name 'index.txt')
+       wc -l $(find ${volume} -type f -name 'index.txt')
 
     done
 else

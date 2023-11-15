@@ -332,7 +332,7 @@ function catalog_select_catalog_month(){
  */
 function catalog_select_directory(){
 
-    var select = document.getElementById("directory");
+    var select = document.getElementById("catalog_directory");
     if (select.hasChildNodes()){
 
         var children = select.childNodes;
@@ -606,7 +606,7 @@ function catalog_configure_month(){
  */
 function catalog_configure_directory(){
 
-    var select = document.getElementById('directory');
+    var select = document.getElementById('catalog_directory');
     if (null != select){
 
         var children = select.childNodes;
