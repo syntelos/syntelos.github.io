@@ -330,7 +330,7 @@ function catalog_select_catalog_month(){
 /*
  * <onchange> from <select#directory>.
  */
-function catalog_select_directory(){
+function catalog_select_catalog_directory(){
 
     var select = document.getElementById("catalog_directory");
     if (select.hasChildNodes()){
@@ -345,14 +345,7 @@ function catalog_select_directory(){
 
                 catalog_directory = option.value;
 
-                if ('recent' == catalog_volume){
-
-                    document.location.hash = option.value;
-                }
-                else {
-
-                    document.location.hash = '';
-                }
+                document.location.hash = catalog_volume+'-'+catalog_directory;
             }
         }
     }
@@ -365,12 +358,21 @@ function catalog_select_directory(){
  */
 function catalog_configure(){
 
-    if (null != document.location.hash && 9 == document.location.hash.length){
-
-        catalog_volume = 'recent';
-        catalog_directory = document.location.hash.substring(1,9);
-        catalog_year = catalog_directory.substring(0,4);
-        catalog_month = catalog_directory.substring(4,6);
+    if (null != document.location.hash && 0 != document.location.hash.length){
+	var anchor = document.location.hash;
+	var anchor_index = anchor.indexOf('-');
+	if (0 < anchor_index){
+	    catalog_volume = anchor.substring(1,anchor_index);
+            catalog_directory = anchor.substring(anchor_index+1,anchor.length);
+            catalog_year = catalog_directory.substring(0,4);
+            catalog_month = catalog_directory.substring(4,6);
+	}
+	else {
+            catalog_volume = 'recent';
+            catalog_directory = anchor.substring(1,9);
+            catalog_year = catalog_directory.substring(0,4);
+            catalog_month = catalog_directory.substring(4,6);
+	}
     }
 
     catalog_configure_volume();
@@ -384,7 +386,9 @@ function catalog_configure_volume(){
 
     var catalog_volume_loader = new XMLHttpRequest();
 
-    catalog_volume_loader.open("GET","/index.txt",false);
+    var catalog_volume_reference = "/index.txt";
+
+    catalog_volume_loader.open("GET",catalog_volume_reference,false);
 
     catalog_volume_loader.onload = function (e) {
 
@@ -459,7 +463,9 @@ function catalog_configure_year(){
 
     var catalog_year_loader = new XMLHttpRequest();
 
-    catalog_year_loader.open("GET","/"+catalog_volume+"/index.txt",false);
+    var catalog_year_reference = "/"+catalog_volume+"/index.txt";
+
+    catalog_year_loader.open("GET",catalog_year_reference,false);
 
     catalog_year_loader.onload = function (e) {
 
@@ -535,7 +541,9 @@ function catalog_configure_month(){
 
     var catalog_month_loader = new XMLHttpRequest();
 
-    catalog_month_loader.open("GET","/"+catalog_volume+"/"+catalog_year+"/index.txt",false);
+    var catalog_month_reference = "/"+catalog_volume+"/"+catalog_year+"/index.txt";
+
+    catalog_month_loader.open("GET",catalog_month_reference,false);
 
     catalog_month_loader.onload = function (e) {
 
@@ -622,30 +630,25 @@ function catalog_configure_directory(){
         }
     }
 
-    var directory_loader = new XMLHttpRequest();
+    var catalog_directory_loader = new XMLHttpRequest();
 
-    directory_loader.open("GET","/"+catalog_volume+"/"+catalog_year+'/'+catalog_month+"/index.txt",false);
+    var catalog_directory_reference = "/"+catalog_volume+"/"+catalog_year+'/'+catalog_month+"/index.txt";
 
-    directory_loader.onload = function (e) {
+    catalog_directory_loader.open("GET",catalog_directory_reference,false);
 
-        if (4 == directory_loader.readyState && 200 == directory_loader.status &&
-            null != directory_loader.responseText && 8 < directory_loader.responseText.length)
+    catalog_directory_loader.onload = function (e) {
+
+        if (4 == catalog_directory_loader.readyState && 200 == catalog_directory_loader.status &&
+            null != catalog_directory_loader.responseText && 8 < catalog_directory_loader.responseText.length)
         {
-            var index_txt = directory_loader.responseText;
+            var index_txt = catalog_directory_loader.responseText;
             var index_ary = index_txt.split('\n');
 
             if (null == catalog_directory){
 
                 catalog_directory = index_ary[0];
 
-                if ('recent' == catalog_volume){
-
-                    document.location.hash = catalog_directory;
-                }
-                else {
-
-                    document.location.hash = '';
-                }
+                document.location.hash = catalog_volume+'-'+catalog_directory;
             }
 
             var count = index_ary.length;
@@ -669,12 +672,12 @@ function catalog_configure_directory(){
                 }
             }
 
-            select.onchange = catalog_select_directory;
+            select.onchange = catalog_select_catalog_directory;
 
             catalog_configure_pages();
         }
     };
-    directory_loader.send(null);
+    catalog_directory_loader.send(null);
 
 }
 
@@ -693,47 +696,33 @@ function catalog_configure_pages(){
 
             child = children.item(index);
 
-            if (null != child && "page text" == child.className && "page" != child.id){
+            if (null != child && "page text" == child.className){
 
-                document.body.removeChild(child);
+		if ("page" == child.id){
+
+		    child.style.visibility = 'visible';
+		}
+		else {
+                    document.body.removeChild(child);
+		}
             }
         }
     }
 
-    var pages_loader = new XMLHttpRequest();
+    var catalog_pages_loader = new XMLHttpRequest();
 
-    pages_loader.open("GET","/"+catalog_volume+"/"+catalog_year+'/'+catalog_month+'/'+catalog_directory+".json",false);
+    var catalog_pages_reference = "/"+catalog_volume+"/"+catalog_year+'/'+catalog_month+'/'+catalog_directory+".json";
 
-    pages_loader.onload = function (e) {
+    catalog_pages_loader.open("GET",catalog_pages_reference,false);
 
-        if (4 == pages_loader.readyState && 200 == pages_loader.status &&
-            null != pages_loader.responseText)
+    catalog_pages_loader.onload = function (e) {
+
+        if (4 == catalog_pages_loader.readyState && 200 == catalog_pages_loader.status &&
+            null != catalog_pages_loader.responseText)
         {
-            var directory = JSON.parse(pages_loader.responseText);
-
-            var children = document.body.childNodes;
-            var count = children.length;
-            var index;
-            var child;
-
-            for (index = 0; index < count; index++){
-
-                child = children.item(index);
-
-                if ("page text" == child.className){
-
-                    if ("page" == child.id){
-
-                        child.style.visibility = 'visible';
-                    }
-                    else {
-
-                        child.style.visibility = 'hidden';
-                    }
-                }
-            }
-
+            var directory = JSON.parse(catalog_pages_loader.responseText);
             var count = directory.length;
+            var index;
             var pg;
             var div;
 
@@ -806,6 +795,6 @@ function catalog_configure_pages(){
             }
         }
     };
-    pages_loader.send(null);
+    catalog_pages_loader.send(null);
 
 }
