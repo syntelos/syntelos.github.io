@@ -1,13 +1,9 @@
 /*
  * https://www.syntelos.io/catalog.js
- * Copyright 2022 John Pritchard (@syntelos)
+ * Copyright 2023 John Douglas Pritchard, Syntelos
  * CC-BY-NC https://creativecommons.org/licenses/by-nc/4.0/
  */
 
-/*
- * Paging period in milliseconds.
- */
-var catalog_schedule = 10000;
 /*
  * <catalog> reference in "/<catalog>/YYYY/MM/".
  */
@@ -26,85 +22,320 @@ var catalog_month = null;
  */
 var catalog_directory = null;
 /*
- * Interval ID for UX default auto-paging behavior.
+ * URL path identity including hyphen and underscore
+ * delimited from remainder by forward solidus '/'.
  */
-var catalog_paging_id = null;
+var catalog_identifier = null;
+
+/*
+ * Automatic paging initial behavior.
+ */
+var catalog_paging_automatic_state = true;
+/*
+ * Automatic paging period in milliseconds.
+ */
+var catalog_paging_automatic_schedule = 10000;
+/*
+ * Automatic paging Interval ID.
+ */
+var catalog_paging_automatic_interval = null;
+
+/*
+ * Define document location from page state.
+ */
+function document_location_hash_put(){
+    if (null != catalog_volume && null != catalog_directory && null != catalog_identifier){
+
+	var reference = (catalog_volume+'/'+catalog_directory+'/'+catalog_identifier);
+
+	document.location.hash = reference;
+
+	return true;
+    }
+    else {
+	document.location.hash = "";
+
+	return false;
+    }
+}
+/*
+ * Derive page state from document location.
+ */
+function document_location_hash_get(){
+    if (null != document.location.hash && 0 != document.location.hash.length){
+	var anchor = document.location.hash;
+	if ('#' == anchor[0]){
+	    anchor = anchor.substring(1,anchor.length)
+	}
+	var anchor_list = anchor.split('/');
+	if (3 == anchor_list.length){
+
+	    catalog_volume = anchor_list[0];
+	    catalog_directory = anchor_list[1];
+	    catalog_identifier = anchor_list[2];
+
+	    if (8 == catalog_directory.length){
+		try {
+		    catalog_year = catalog_directory.substring(0,4);
+
+		    catalog_month = catalog_directory.substring(4,6);
+
+		    return true;
+
+		} catch (e){
+		    console.error(e)
+		}
+	    } else {
+		console.error('[catalog_directory] '+catalog_directory)
+	    }
+	}
+    }
+    return false;
+}
+/*
+ * Produce document hash reference from page state and
+ * argument identifier.
+ */
+function document_location_hash_did(id){
+
+    if (catalog_volume && catalog_directory && id){
+
+	return '#'+catalog_volume+'/'+catalog_directory+'/'+pg.id;
+    } else {
+	return ""
+    }
+}
+/*
+ * Update page state with identifier and produce document 
+ * location.
+ */
+function document_location_hash_nav(id){
+
+    if (catalog_volume && catalog_directory && id){
+
+	catalog_identifier = id;
+    }
+
+    return document_location_hash_put();
+}
+
+/*
+ * Perform U/I update in worker thread.
+ */
+function gui_sync(){
+
+    if (null != catalog_identifier){
+	/*
+	 * Selector
+	 */
+	try {
+	    var select = document.getElementById("catalog_identifier");
+	    if (select && select.hasChildNodes()){
+
+		var children = select.childNodes;
+		var count = children.length;
+		var index;
+		var option;
+
+		for (index = 0; index < count; index++){
+
+		    option = children.item(index);
+
+		    option.selected = (catalog_identifier == option.value);
+		}
+	    }
+	} catch (e){
+	    console.error(e)
+	}
+	/*
+	 * Selection
+	 */
+	try {
+	    var children = document.body.childNodes;
+
+	    var count = children.length;
+
+	    for (index = 0; index < count; index++){
+
+		child = children.item(index);
+
+		if ('page text' == child.className){
+
+		    if (catalog_identifier == child.id){
+
+			child.style.visibility = 'visible';
+		    }
+		    else {
+
+			child.style.visibility = 'hidden';
+		    }
+		}
+	    }
+	} catch (e){
+	    console.error(e)
+	}
+    }
+}
 
 /*
  * <svg#left.navigation:onclick> [UX display navigation]
  */
 function catalog_nav_left (){
 
-    catalog_page_manual();
+    catalog_paging_manual();
 
     catalog_page_prev();
+
+    return true
 }
 /*
  * <svg#recycle.navigation:onclick> [UX display navigation]
  */
 function catalog_nav_recycle (){
 
-    if (catalog_paging_id){
+    if (catalog_paging_automatic_interval){
 
-        catalog_page_manual();
+        catalog_paging_manual();
     }
     else {
 
         catalog_page_begin();
 
-        catalog_page_automatic();
+        catalog_paging_automatic();
     }
+    return true
 }
 /*
  * <svg#right.navigation:onclick> [UX display navigation]
  */
 function catalog_nav_right (){
 
-    catalog_page_manual();
+    catalog_paging_manual();
 
     catalog_page_next();
+
+    return true
 }
-
 /*
- * UX display paging
+ * The "hashchange" event listener functions in the page
+ * state realm, needing to synchronize the selector and the
+ * selection with the document location hash as linked from
+ * the "#list" page.
  */
-function catalog_page_automatic(){
+function catalog_nav_hashchange(e){
+    /*
+     * Location
+     */
+    if (null != document.location.hash && 0 != document.location.hash.length){
+	var anchor = document.location.hash;
+	if ('#' == anchor[0]){
+	    anchor = anchor.substring(1,anchor.length);
+	}
+	var anchor_list = anchor.split('/');
+	if (3 == anchor_list.length){
 
-    if (! catalog_paging_id){
+	    var volume = anchor_list[0];
+	    var directory = anchor_list[1];
+	    var identifier = anchor_list[2];
 
-        catalog_paging_id = setInterval(catalog_page_next,catalog_schedule);
+	    if (volume == catalog_volume && directory == catalog_directory){
+		catalog_identifier = identifier;
 
-        {
-            var svg_circle = document.getElementById('recycle_circle');
-            var svg_rect = document.getElementById('recycle_rect');
+		gui_sync();
+	    }
+	}
+    } 
+    return true
+}
+/*
+ * The "keypress" event listener functions in the page
+ * state realm, needing to synchronize the selector and the
+ * selection with the document location hash as linked from
+ * the "#list" page.
+ */
+function catalog_nav_keypress(e){
 
-            if (svg_circle && svg_rect){
-                svg_circle.style.visibility = 'visible';
-                svg_rect.style.visibility = 'hidden';
-            }
-        }
+    switch (e.key){
+
+    case "Home":
+    case "Up":
+    case "Left":
+    case "PageUp":
+    case "<":
+    case "ArrowUp":
+    case "ArrowLeft":
+	return catalog_nav_left()
+
+    case "End":
+    case "PageDown":
+    case "Down":
+    case "Right":
+    case "Enter":
+    case ">":
+    case "ArrowDown":
+    case "ArrowRight":
+	return catalog_nav_right()
+
+    default:
+	return catalog_nav_recycle()
     }
 }
 /*
  * UX display paging
  */
-function catalog_page_manual(){
+function catalog_paging_begin(){
 
-    if (catalog_paging_id){
+    if (catalog_paging_automatic_state){
 
-        clearInterval(catalog_paging_id);
+	catalog_paging_automatic()
 
-        catalog_paging_id = null;
+    } else {
 
-        {
-            var svg_circle = document.getElementById('recycle_circle');
-            var svg_rect = document.getElementById('recycle_rect');
+	catalog_paging_manual()
+    }
+}
+/*
+ * UX display paging
+ */
+function catalog_paging_automatic(){
 
-            if (svg_circle && svg_rect){
-                svg_circle.style.visibility = 'hidden';
-                svg_rect.style.visibility = 'visible';
-            }
+    if (null == catalog_paging_automatic_interval){
+
+        catalog_paging_automatic_interval = setInterval(catalog_page_next,catalog_paging_automatic_schedule);
+    }
+    try {
+        var svg_circle = document.getElementById('recycle_circle');
+        var svg_rect = document.getElementById('recycle_rect');
+
+        if (svg_circle && svg_rect){
+            svg_circle.style.visibility = 'visible';
+            svg_rect.style.visibility = 'hidden';
         }
+    } catch (e){
+	console.error(e)
+    }
+}
+/*
+ * UX display paging
+ */
+function catalog_paging_manual(){
+
+    if (null != catalog_paging_automatic_interval){
+
+        clearInterval(catalog_paging_automatic_interval);
+
+        catalog_paging_automatic_interval = null;
+    }
+    try {
+        var svg_circle = document.getElementById('recycle_circle');
+        var svg_rect = document.getElementById('recycle_rect');
+
+        if (svg_circle && svg_rect){
+            svg_circle.style.visibility = 'hidden';
+            svg_rect.style.visibility = 'visible';
+        }
+    } catch (e){
+	console.error(e)
     }
 }
 /*
@@ -126,13 +357,11 @@ function catalog_page_prev (){
 
             if ('visible' == child.style.visibility){
 
-                child.style.visibility = 'hidden';
-
                 prev = true;
             }
             else if (prev){
 
-                child.style.visibility = 'visible';
+		document_location_hash_nav(child.id)
 
                 prev = false;
 
@@ -149,12 +378,11 @@ function catalog_page_prev (){
 
             if ('page text' == child.className){
 
-                child.style.visibility = 'visible';
+		document_location_hash_nav(child.id)
 
                 prev = false;
 
                 break;
-
             }
         }
     }
@@ -165,24 +393,16 @@ function catalog_page_prev (){
  * UX display paging
  */
 function catalog_page_begin (){
-    var children = document.body.childNodes;
-    var count = children.length;
 
-    for (index = 0; index < count; index++){
+    if (document_location_hash_get() || document_location_hash_put()){
 
-        child = children.item(index);
+	gui_sync();
 
-        if ('page text' == child.className){
+	return true;
 
-            if ('page' == child.id){
+    } else {
 
-                child.style.visibility = 'visible';
-            }
-            else {
-
-                child.style.visibility = 'hidden';
-            }
-        }
+	return document_location_hash_nav('page')
     }
 }
 
@@ -213,6 +433,8 @@ function catalog_page_next (){
 
                 child.style.visibility = 'visible';
 
+		document_location_hash_nav(child.id)
+
                 next = false;
 
                 break;
@@ -230,6 +452,8 @@ function catalog_page_next (){
 
                 child.style.visibility = 'visible';
 
+		document_location_hash_nav(child.id)
+
                 next = false;
 
                 break;
@@ -244,6 +468,7 @@ function catalog_page_next (){
  * <onchange> from <select#catalog_volume>.
  */
 function catalog_select_catalog_volume(){
+    catalog_paging_manual();
 
     var select = document.getElementById("catalog_volume");
     if (select.hasChildNodes()){
@@ -264,6 +489,10 @@ function catalog_select_catalog_volume(){
                 catalog_month = null;
 
                 catalog_directory = null;
+
+		catalog_identifier = null;
+
+		document_location_hash_put();
             }
         }
     }
@@ -275,9 +504,10 @@ function catalog_select_catalog_volume(){
  * <onchange> from <select#catalog_year>.
  */
 function catalog_select_catalog_year(){
+    catalog_paging_manual();
 
     var select = document.getElementById("catalog_year");
-    if (select.hasChildNodes()){
+    if (select && select.hasChildNodes()){
 
         var children = select.childNodes;
         var count = children.length;
@@ -293,6 +523,10 @@ function catalog_select_catalog_year(){
                 catalog_month = null;
 
                 catalog_directory = null;
+
+		catalog_identifier = null;
+
+		document_location_hash_put();
             }
         }
     }
@@ -304,9 +538,10 @@ function catalog_select_catalog_year(){
  * <onchange> from <select#catalog_month>.
  */
 function catalog_select_catalog_month(){
+    catalog_paging_manual();
 
     var select = document.getElementById("catalog_month");
-    if (select.hasChildNodes()){
+    if (select && select.hasChildNodes()){
 
         var children = select.childNodes;
         var count = children.length;
@@ -320,6 +555,10 @@ function catalog_select_catalog_month(){
                 catalog_month = option.value;
 
                 catalog_directory = null;
+
+		catalog_identifier = null;
+
+		document_location_hash_put();
             }
         }
     }
@@ -331,9 +570,10 @@ function catalog_select_catalog_month(){
  * <onchange> from <select#directory>.
  */
 function catalog_select_catalog_directory(){
+    catalog_paging_manual();
 
     var select = document.getElementById("catalog_directory");
-    if (select.hasChildNodes()){
+    if (select && select.hasChildNodes()){
 
         var children = select.childNodes;
         var count = children.length;
@@ -341,11 +581,13 @@ function catalog_select_catalog_directory(){
         for (index = 0; index < count; index++){
 
             var option = children.item(index);
-            if (option.selected && null != option.value){
+            if (option.selected){
 
                 catalog_directory = option.value;
 
-                document.location.hash = catalog_volume+'-'+catalog_directory;
+		catalog_identifier = null;
+
+		document_location_hash_put();
             }
         }
     }
@@ -354,29 +596,44 @@ function catalog_select_catalog_directory(){
 }
 
 /*
+ * <onchange> from <select#directory>.
+ */
+function catalog_select_catalog_identifier(){
+    catalog_paging_manual();
+
+    var select = document.getElementById("catalog_identifier");
+    if (select && select.hasChildNodes()){
+
+        var children = select.childNodes;
+        var count = children.length;
+        var index;
+        for (index = 0; index < count; index++){
+
+            var option = children.item(index);
+            if (option.selected){
+
+		catalog_identifier = option.value;
+
+                document_location_hash_put();
+	    }
+	}
+    }
+}
+
+/*
  * Document body <onload>.
  */
 function catalog_configure(){
 
-    if (null != document.location.hash && 0 != document.location.hash.length){
-	var anchor = document.location.hash;
-	var anchor_index = anchor.indexOf('-');
-	if (0 < anchor_index){
-	    catalog_volume = anchor.substring(1,anchor_index);
-            catalog_directory = anchor.substring(anchor_index+1,anchor.length);
-            catalog_year = catalog_directory.substring(0,4);
-            catalog_month = catalog_directory.substring(4,6);
-	}
-	else {
-            catalog_volume = 'recent';
-            catalog_directory = anchor.substring(1,9);
-            catalog_year = catalog_directory.substring(0,4);
-            catalog_month = catalog_directory.substring(4,6);
-	}
-    }
+    window.onhashchange = catalog_nav_hashchange
+
+    document.body.onkeypress = catalog_nav_keypress
+
+    catalog_paging_manual();
+
+    catalog_paging_automatic_state = (!document_location_hash_get());
 
     catalog_configure_volume();
-
 }
 
 /*
@@ -400,19 +657,15 @@ function catalog_configure_volume(){
             var index_txt = catalog_volume_loader.responseText;
             var index_ary = index_txt.split('\n');
 
-            if (null == catalog_volume){
+	    if (null == catalog_volume){
 
-                catalog_volume = index_ary[0];
-
-                catalog_year = null;
-                catalog_month = null;
-                catalog_directory = null;
-            }
+		catalog_volume = index_ary[0];
+	    }
             /*
              */
             var select = document.getElementById('catalog_volume');
             if (null != select){
-                {
+                try {
                     var children = select.childNodes;
                     var count = children.length;
                     var index;
@@ -424,28 +677,30 @@ function catalog_configure_volume(){
 
                         select.removeChild(child);
                     }
-                }
-                var count = index_ary.length;
-                var index;
-                for (index = 0; index < count; index++){
+                } catch (e){
+		    console.error(e)
+		}
+		try {
+                    var count = index_ary.length;
+                    var index;
+                    for (index = 0; index < count; index++){
 
-                    var index_value = index_ary[index];
-                    if (1 < index_value.length){
+			var index_value = index_ary[index];
+			if (1 < index_value.length){
 
-                        var option = document.createElement("option");
-                        option.className = 'text';
-                        option.value = index_value;
-                        option.innerText = index_value;
+                            var option = document.createElement("option");
+                            option.className = 'text';
+                            option.value = index_value;
+                            option.innerText = index_value;
 
-                        if (index_value == catalog_volume){
+                            option.selected = (index_value == catalog_volume);
 
-                            option.selected = 'true';
-                        }
-
-                        select.appendChild(option);
+                            select.appendChild(option);
+			}
                     }
-                }
-
+		} catch (e){
+		    console.error(e)
+		}
                 select.onchange = catalog_select_catalog_volume;
             }
 
@@ -461,76 +716,76 @@ function catalog_configure_volume(){
  */
 function catalog_configure_year(){
 
-    var catalog_year_loader = new XMLHttpRequest();
+    if (catalog_volume){
 
-    var catalog_year_reference = "/"+catalog_volume+"/index.txt";
+	var catalog_year_loader = new XMLHttpRequest();
 
-    catalog_year_loader.open("GET",catalog_year_reference,false);
+	var catalog_year_reference = "/"+catalog_volume+"/index.txt";
 
-    catalog_year_loader.onload = function (e) {
+	catalog_year_loader.open("GET",catalog_year_reference,false);
 
-        if (4 == catalog_year_loader.readyState && 200 == catalog_year_loader.status &&
-            null != catalog_year_loader.responseText && 4 < catalog_year_loader.responseText.length)
-        {
-            /*
-             */
-            var index_txt = catalog_year_loader.responseText;
-            var index_ary = index_txt.split('\n');
+	catalog_year_loader.onload = function (e) {
 
-            if (null == catalog_year){
+            if (4 == catalog_year_loader.readyState && 200 == catalog_year_loader.status &&
+		null != catalog_year_loader.responseText && 4 < catalog_year_loader.responseText.length)
+            {
+		/*
+		 */
+		var index_txt = catalog_year_loader.responseText;
+		var index_ary = index_txt.split('\n');
 
-                catalog_year = index_ary[0];
+		if (null == catalog_year){
 
-                catalog_month = null;
+                    catalog_year = index_ary[0];
+		}
+		/*
+		 */
+		var select = document.getElementById('catalog_year');
+		if (null != select){
+                    try {
+			var children = select.childNodes;
+			var count = children.length;
+			var index;
+			var child;
 
-                catalog_directory = null;
+			for (index = (count-1); 0 <= index; index--){
+
+                            child = children.item(index);
+
+                            select.removeChild(child);
+			}
+                    } catch (e){
+			console.error(e)
+		    }
+		    try {
+			var count = index_ary.length;
+			var index;
+			for (index = 0; index < count; index++){
+
+			    var index_value = index_ary[index];
+			    if (4 == index_value.length){
+
+				var option = document.createElement("option");
+				option.className = 'text';
+				option.value = index_value;
+				option.innerText = index_value;
+
+				option.selected = (index_value == catalog_year);
+
+				select.appendChild(option);
+			    }
+			}
+		    } catch (e){
+			console.error(e)
+		    }
+                    select.onchange = catalog_select_catalog_year;
+		}
+
+		catalog_configure_month();
             }
-            /*
-             */
-            var select = document.getElementById('catalog_year');
-            if (null != select){
-                {
-                    var children = select.childNodes;
-                    var count = children.length;
-                    var index;
-                    var child;
-
-                    for (index = (count-1); 0 <= index; index--){
-
-                        child = children.item(index);
-
-                        select.removeChild(child);
-                    }
-                }
-                var count = index_ary.length;
-                var index;
-                for (index = 0; index < count; index++){
-
-                    var index_value = index_ary[index];
-                    if (4 == index_value.length){
-
-                        var option = document.createElement("option");
-                        option.className = 'text';
-                        option.value = index_value;
-                        option.innerText = index_value;
-
-                        if (index_value == catalog_year){
-
-                            option.selected = 'true';
-                        }
-
-                        select.appendChild(option);
-                    }
-                }
-
-                select.onchange = catalog_select_catalog_year;
-            }
-
-            catalog_configure_month();
-        }
-    };
-    catalog_year_loader.send(null);
-
+	};
+	catalog_year_loader.send(null);
+    }
 }
 
 /*
@@ -539,74 +794,76 @@ function catalog_configure_year(){
  */
 function catalog_configure_month(){
 
-    var catalog_month_loader = new XMLHttpRequest();
+    if (catalog_volume && catalog_year){
+	
+	var catalog_month_loader = new XMLHttpRequest();
 
-    var catalog_month_reference = "/"+catalog_volume+"/"+catalog_year+"/index.txt";
+	var catalog_month_reference = "/"+catalog_volume+"/"+catalog_year+"/index.txt";
 
-    catalog_month_loader.open("GET",catalog_month_reference,false);
+	catalog_month_loader.open("GET",catalog_month_reference,false);
 
-    catalog_month_loader.onload = function (e) {
+	catalog_month_loader.onload = function (e) {
 
-        if (4 == catalog_month_loader.readyState && 200 == catalog_month_loader.status &&
-            null != catalog_month_loader.responseText && 2 < catalog_month_loader.responseText.length)
-        {
-            /*
-             */
-            var index_txt = catalog_month_loader.responseText;
-            var index_ary = index_txt.split('\n');
+            if (4 == catalog_month_loader.readyState && 200 == catalog_month_loader.status &&
+		null != catalog_month_loader.responseText && 2 < catalog_month_loader.responseText.length)
+            {
+		/*
+		 */
+		var index_txt = catalog_month_loader.responseText;
+		var index_ary = index_txt.split('\n');
 
-            if (null == catalog_month){
+		if (null == catalog_month){
 
-                catalog_month = index_ary[0];
+                    catalog_month = index_ary[0];
+		}
+		/*
+		 */
+		var select = document.getElementById('catalog_month');
+		if (null != select){
+                    try {
+			var children = select.childNodes;
+			var count = children.length;
+			var index;
+			var child;
 
-                catalog_directory = null;
+			for (index = (count-1); 0 <= index; index--){
+
+                            child = children.item(index);
+
+                            select.removeChild(child);
+			}
+                    } catch (e){
+			console.error(e)
+		    }
+		    try {
+			var count = index_ary.length;
+			var index;
+			for (index = 0; index < count; index++){
+
+			    var index_value = index_ary[index];
+			    if (2 == index_value.length){
+
+				var option = document.createElement("option");
+				option.className = 'text';
+				option.value = index_value;
+				option.innerText = index_value;
+
+				option.selected = (index_value == select);
+
+				select.appendChild(option);
+			    }
+			}
+		    } catch (e){
+			console.error(e)
+		    }
+                    select.onchange = catalog_select_catalog_month;
+		}
+
+		catalog_configure_directory();
             }
-            /*
-             */
-            var select = document.getElementById('catalog_month');
-            if (null != select){
-                {
-                    var children = select.childNodes;
-                    var count = children.length;
-                    var index;
-                    var child;
-
-                    for (index = (count-1); 0 <= index; index--){
-
-                        child = children.item(index);
-
-                        select.removeChild(child);
-                    }
-                }
-                var count = index_ary.length;
-                var index;
-                for (index = 0; index < count; index++){
-
-                    var index_value = index_ary[index];
-                    if (2 == index_value.length){
-
-                        var option = document.createElement("option");
-                        option.className = 'text';
-                        option.value = index_value;
-                        option.innerText = index_value;
-
-                        if (index_value == select){
-
-                            option.selected = 'true';
-                        }
-
-                        select.appendChild(option);
-                    }
-                }
-
-                select.onchange = catalog_select_catalog_month;
-            }
-
-            catalog_configure_directory();
-        }
-    };
-    catalog_month_loader.send(null);
-
+	};
+	catalog_month_loader.send(null);
+    }
 }
 
 /*
@@ -614,71 +871,76 @@ function catalog_configure_month(){
  */
 function catalog_configure_directory(){
 
-    var select = document.getElementById('catalog_directory');
-    if (null != select){
+    if (catalog_volume && catalog_year && catalog_month){
+	
+	var catalog_directory_loader = new XMLHttpRequest();
 
-        var children = select.childNodes;
-        var count = children.length;
-        var index;
-        var child;
+	var catalog_directory_reference = "/"+catalog_volume+"/"+catalog_year+'/'+catalog_month+"/index.txt";
 
-        for (index = (count-1); 0 <= index; index--){
+	catalog_directory_loader.open("GET",catalog_directory_reference,false);
 
-            child = children.item(index);
+	catalog_directory_loader.onload = function (e) {
 
-            select.removeChild(child);
-        }
+            if (4 == catalog_directory_loader.readyState && 200 == catalog_directory_loader.status &&
+		null != catalog_directory_loader.responseText && 8 < catalog_directory_loader.responseText.length)
+            {
+		/*
+		 */
+		var index_txt = catalog_directory_loader.responseText;
+		var index_ary = index_txt.split('\n');
+
+		if (null == catalog_directory){
+
+                    catalog_directory = index_ary[0];
+		}
+		/*
+		 */
+		var select = document.getElementById('catalog_directory');
+		if (null != select){
+		    try {
+			var children = select.childNodes;
+			var count = children.length;
+			var index;
+			var child;
+
+			for (index = (count-1); 0 <= index; index--){
+
+			    child = children.item(index);
+
+			    select.removeChild(child);
+			}
+		    } catch (e){
+			console.error(e)
+		    }
+		    try {
+			var count = index_ary.length;
+			var index;
+			for (index = 0; index < count; index++){
+
+			    var index_value = index_ary[index];
+			    if (8 == index_value.length){
+
+				var option = document.createElement("option");
+				option.className = 'text';
+				option.value = index_value;
+				option.innerText = index_value;
+
+				option.selected = (index_value == catalog_directory);
+
+				select.appendChild(option);
+			    }
+			}
+		    } catch (e){
+			console.error(e)
+		    }
+		    select.onchange = catalog_select_catalog_directory;
+		}
+
+		catalog_configure_pages();
+            }
+	};
+	catalog_directory_loader.send(null);
     }
-
-    var catalog_directory_loader = new XMLHttpRequest();
-
-    var catalog_directory_reference = "/"+catalog_volume+"/"+catalog_year+'/'+catalog_month+"/index.txt";
-
-    catalog_directory_loader.open("GET",catalog_directory_reference,false);
-
-    catalog_directory_loader.onload = function (e) {
-
-        if (4 == catalog_directory_loader.readyState && 200 == catalog_directory_loader.status &&
-            null != catalog_directory_loader.responseText && 8 < catalog_directory_loader.responseText.length)
-        {
-            var index_txt = catalog_directory_loader.responseText;
-            var index_ary = index_txt.split('\n');
-
-            if (null == catalog_directory){
-
-                catalog_directory = index_ary[0];
-
-                document.location.hash = catalog_volume+'-'+catalog_directory;
-            }
-
-            var count = index_ary.length;
-            var index;
-            for (index = 0; index < count; index++){
-
-                var index_value = index_ary[index];
-                if (8 == index_value.length){
-
-                    var option = document.createElement("option");
-                    option.className = 'text';
-                    option.value = index_value;
-                    option.innerText = index_value;
-
-                    if (index_value == catalog_directory){
-
-                        option.selected = 'true';
-                    }
-
-                    select.appendChild(option);
-                }
-            }
-
-            select.onchange = catalog_select_catalog_directory;
-
-            catalog_configure_pages();
-        }
-    };
-    catalog_directory_loader.send(null);
-
 }
 
 /*
@@ -686,7 +948,7 @@ function catalog_configure_directory(){
  * construction.
  */
 function catalog_configure_pages(){
-    {
+    try {
         var children = document.body.childNodes;
         var count = children.length;
         var index;
@@ -707,94 +969,320 @@ function catalog_configure_pages(){
 		}
             }
         }
+    } catch (e){
+	console.error(e)
     }
 
-    var catalog_pages_loader = new XMLHttpRequest();
+    if (catalog_volume && catalog_year && catalog_month && catalog_directory ){
 
-    var catalog_pages_reference = "/"+catalog_volume+"/"+catalog_year+'/'+catalog_month+'/'+catalog_directory+".json";
+	var catalog_pages_loader = new XMLHttpRequest();
 
-    catalog_pages_loader.open("GET",catalog_pages_reference,false);
+	var catalog_pages_reference = "/"+catalog_volume+"/"+catalog_year+'/'+catalog_month+'/'+catalog_directory+".json";
 
-    catalog_pages_loader.onload = function (e) {
+	catalog_pages_loader.open("GET",catalog_pages_reference,false);
 
-        if (4 == catalog_pages_loader.readyState && 200 == catalog_pages_loader.status &&
-            null != catalog_pages_loader.responseText)
-        {
-            var directory = JSON.parse(catalog_pages_loader.responseText);
+	catalog_pages_loader.onload = function (e) {
+
+            if (4 == catalog_pages_loader.readyState &&
+		200 == catalog_pages_loader.status)
+            {
+		try {
+		    var directory = JSON.parse(catalog_pages_loader.responseText);
+
+		    catalog_configure_pages_construct_select(directory)
+
+		    catalog_configure_pages_construct_list(directory)
+
+		    catalog_configure_pages_construct_frames(directory)
+
+		    catalog_page_begin()
+
+		    catalog_paging_begin()
+
+		} catch (e){
+		    console.error(catalog_pages_reference+' '+e)
+		}
+            } else {
+		console.log(catalog_pages_reference+" (state: "+catalog_pages_loader.readyState+", status: "+catalog_pages_loader.status+")")
+	    }
+	};
+	catalog_pages_loader.send(null);
+    }
+}
+
+/*
+ */
+function catalog_configure_pages_construct_select(directory){
+    var select = document.getElementById('catalog_identifier');
+    if (select){
+        try {
+            var children = select.childNodes;
+            var count = children.length;
+            var index;
+            var child;
+
+            for (index = (count-1); 0 <= index; index--){
+
+                child = children.item(index);
+
+                select.removeChild(child);
+            }
+        } catch (e){
+	    console.error(e)
+	}
+	try {
+	    var id = 'page'
+	    var option = document.createElement("option");
+	    option.className = 'text';
+	    option.value = id;
+
+	    option.innerText = id;
+
+            option.selected = (id == catalog_identifier)
+
+	    select.appendChild(option);
+	} catch (e){
+	    console.error(e)
+	}
+	try {
+	    var id = 'list'
+	    var option = document.createElement("option");
+	    option.className = 'text';
+	    option.value = id;
+
+	    option.innerText = id;
+
+            option.selected = (id == catalog_identifier)
+
+	    select.appendChild(option);
+	} catch (e){
+	    console.error(e)
+	}
+	try {
             var count = directory.length;
             var index;
-            var pg;
-            var div;
-
             for (index = 0; index < count; index++){
+		pg = directory[index]
 
-                pg = directory[index];
+		if (pg && pg.id){
+		    var option = document.createElement("option");
+		    option.className = 'text';
+		    option.value = pg.id;
 
-                div = document.getElementById(pg.id);
+		    if (pg.name){
+			option.innerText = selectify_name(pg.name);
+		    } else {
+			option.innerText = pg.id;
+		    }
 
-                if (null == div){
+                    option.selected = (pg.id == catalog_identifier);
 
-                    div = document.createElement("div");
+		    select.appendChild(option);
+		}
+            }
+	} catch (e){
+	    console.error(e)
+	}
+        select.onchange = catalog_select_catalog_identifier;
+    }
+}
 
-                    div.id = pg.id;
-                    div.className = 'page text';
-                    div.style.visibility = 'hidden';
+/*
+ */
+function catalog_configure_pages_construct_list(directory){
 
-                    dl = document.createElement("dl");
-                    dl.className = 'catalog';
-                    div.appendChild(dl);
+    div = document.getElementById("list");
+    if (null != div){
 
-                    dt = document.createElement("dt");
-                    dt.className = 'catalog';
-                    dl.appendChild(dt);
+        document.removeChild(div);
+    }
 
-                    if (pg.link && pg.path){
+    div = document.createElement("div")
+    div.id = "list"
+    div.className = 'page text'
+    div.style.visibility = 'hidden'
 
-                        a = document.createElement("a");
-                        a.className = 'text';
-                        a.href = pg.link;
+    dl = document.createElement("dl");
+    dl.className = 'text';
+    div.appendChild(dl);
 
-                        if (pg.icon){
-                            img = document.createElement("img");
-                            img.className  = 'text';
-                            img.src = '/images/'+pg.icon+'.svg';
 
-                            a.appendChild(img);
-                        }
+    var count = directory.length;
+    var index;
+    for (index = 0; index < count; index++){
+	pg = directory[index]
+        if (pg.id && pg.icon && pg.path && pg.link){
+	    
+            dt = document.createElement("dt");
+            dt.className = 'text';
+            dl.appendChild(dt);
 
-                        if (pg.path){
-                            txt = document.createElement("span");
-                            txt.className = 'text';
-                            txt.innerText = pg.path;
+	    a = document.createElement("a");
+	    a.className = 'text';
+	    a.href = document_location_hash_did(pg.id)
+	    a.onclick = catalog_paging_manual
 
-                            a.appendChild(txt);
-                        }
+	    img = document.createElement("img");
+	    img.className  = 'text';
+	    img.src = '/images/syntelos-catalog.svg';
 
-                        dt.appendChild(a);
-                    }
+	    a.appendChild(img);
+	    if (pg.name){
 
-                    dd = document.createElement("dd");
-                    dd.className = 'catalog';
-                    dl.appendChild(dd);
+		txt = document.createElement("span");
+		txt.className = 'text';
+		txt.innerText = pathify_name(pg.name);
 
-                    if (pg.embed){
-                        ifr = document.createElement("iframe");
-                        ifr.src = pg.embed;
-                        ifr.className = 'embed';
+		a.appendChild(txt);
 
-                        dd.appendChild(ifr);
-                    }
-                    document.body.appendChild(div);
-                }
+	    } else {
 
+		txt = document.createElement("span");
+		txt.className = 'text';
+		txt.innerText = pg.path;
+
+		a.appendChild(txt);
+	    }
+	    dt.appendChild(a);
+	}
+    }
+
+    document.body.appendChild(div);
+}
+
+/*
+ */
+function catalog_configure_pages_construct_frames(directory){
+    var count = directory.length;
+    var index;
+
+    for (index = 0; index < count; index++){
+	pg = directory[index]
+
+	div = document.getElementById(pg.id);
+
+	if (null == div){
+
+            div = document.createElement("div");
+
+            div.id = pg.id;
+            div.className = 'page text';
+            div.style.visibility = 'hidden';
+
+            dl = document.createElement("dl");
+            dl.className = 'catalog';
+            div.appendChild(dl);
+
+            dt = document.createElement("dt");
+            dt.className = 'catalog';
+            dl.appendChild(dt);
+
+            if (pg.link && pg.path){
+
+		a = document.createElement("a");
+		a.className = 'text';
+		a.href = pg.link;
+
+		if (pg.icon){
+                    img = document.createElement("img");
+                    img.className  = 'text';
+                    img.src = '/images/'+pg.icon+'.svg';
+
+                    a.appendChild(img);
+		}
+
+		if (pg.path){
+                    txt = document.createElement("span");
+                    txt.className = 'text';
+                    txt.innerText = pg.path;
+
+                    a.appendChild(txt);
+		}
+
+		dt.appendChild(a);
             }
 
-            if (null == catalog_paging_id){
+            dd = document.createElement("dd");
+            dd.className = 'catalog';
+            dl.appendChild(dd);
 
-                catalog_paging_id = setInterval(catalog_page_next,catalog_schedule);
+            if (pg.embed){
+		ifr = document.createElement("iframe");
+		ifr.src = pg.embed;
+		ifr.className = 'embed';
+
+		dd.appendChild(ifr);
             }
-        }
-    };
-    catalog_pages_loader.send(null);
+            document.body.appendChild(div);
+	}
+    }
+}
 
+/*
+ * Convert filename to familiar path representation.
+ */
+function pathify_name(name){
+
+    if (name){
+	var head = name
+	try {
+	    head = name.split('.')[0]
+	} catch (e){
+	}
+
+	var list = head.split('-')
+	if (list){
+	    var count = list.length
+	    var x
+	    var z = list.length
+	    var path = ''
+
+	    for (x = 0; x < z; x++) {
+
+		p = list[x]
+
+		if (p.match(/[0-9]/)){
+		    break
+		} else {
+		    if (path){
+			path += ' '
+		    }
+		    path += ('/'+p)
+		}
+	    }
+	    return path
+	}
+    }
+    return name
+}
+
+/*
+* Heuristic selector.
+ */
+function selectify_name(name){
+
+    if (name){
+	var list = name.split('-')
+
+	if (list && 0 < list.length){
+	    var x = 0
+	    var z = list.length
+
+	    if (3 < z){
+
+		x = (z-3)
+	    }
+	    else if (2 < z){
+
+		x = (z-2)
+	    }
+	    else if (1 < z){
+
+		x = 1
+	    }
+
+	    return list[x]
+	}
+    }
+    return name
 }

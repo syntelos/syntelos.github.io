@@ -14,13 +14,13 @@
 	  background-image: url("/images/syntelos-logo.svg");
 	  background-repeat: no-repeat;
 	  background-attachment: fixed;
-	  background-position: 10% 10%;
+	  background-position: 0 0;
       }
       div.page {
 	  display: block;
 	  position: absolute;
-	  top: 10%;
-	  left: 10%;
+	  top: 100px;
+	  left: 100px;
 	  width: 600px;
 	  height: 600px;
 	  background-color: #ffffffa5;
@@ -29,10 +29,25 @@
 	  z-index: 2;
 	  vertical-align: middle;
       }
-      select.configuration {
+      div.selectors {
 	  display: block;
-	  position: absolute;
+          position: absolute;
 	  top: 2px;
+	  margin: 0;
+	  padding: 0;
+	  width: 49%;
+	  z-index: 3;
+      }
+      div#select_left {
+	  left: 0;
+	  text-align: left;
+      }
+      div#select_right {
+	  right: 0;
+	  text-align: right;
+      }
+      select.configuration {
+	  display: inline;
 	  margin: 0;
 	  padding: 6px;
 	  background-color: #ffffffa5;
@@ -40,17 +55,20 @@
 	  z-index: 3;
 	  cursor: pointer;
       }
-      select#catalog_volume.configuration {
+      select#catalog_volume {
 	  left: 2px;
       }
-      select#catalog_year.configuration {
-	  left: 155px;
-      }
-      select#catalog_month.configuration {
-	  left: 231px;
-      }
-      select#catalog_directory.configuration {
+      select#catalog_identifier {
 	  right: 2px;
+      }
+      div.navigation {
+	  display: block;
+          position: absolute;
+	  bottom: 0;
+	  margin: 0;
+	  padding: 0;
+	  width: 100%;
+	  z-index: 3;
       }
       svg.navigation {
 	  display: block;
@@ -82,14 +100,10 @@
 	  text-decoration: none;
 	  vertical-align: middle;
       }
-      dt.text {
-	  height: 32px;
-      }
-      dd.text {
-	  height: 32px;
-      }
-      dt.catalog {
-	  height: 50px;
+      dt {
+	  margin: 6px;
+	  overflow: hidden;
+	  text-indent: 20px;
       }
       img.text {
 	  display: inline;
@@ -120,33 +134,41 @@
     <script language="javascript" src="/catalog.js">
     </script>
   </head>
-  <body onload="catalog_configure()" onkeypress="catalog_nav_recycle()">
+  <body onload="catalog_configure()">
 
-    <select id="catalog_volume" class="configuration text">
-    </select>
-    <select id="catalog_year" class="configuration text">
-    </select>
-    <select id="catalog_month" class="configuration text">
-    </select>
-    <select id="catalog_directory" class="configuration text">
-    </select>
+    <div id="select_left" class="selectors">
+      <select id="catalog_volume" class="configuration text" onchange="catalog_select_catalog_volume()">
+      </select>
+      <select id="catalog_year" class="configuration text" onchange="catalog_select_catalog_year()">
+      </select>
+      <select id="catalog_month" class="configuration text" onchange="catalog_select_catalog_month()">
+      </select>
+    </div>
+    <div id="select_right" class="selectors">
+      <select id="catalog_directory" class="configuration text" onchange="catalog_select_catalog_directory()">
+      </select>
+      <select id="catalog_identifier" class="configuration text" onchange="catalog_select_catalog_identifier()">
+      </select>
+    </div>
 
-    <svg id="left" class="navigation text" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" onclick="catalog_nav_left()">
-      <path fill="none" stroke-width="20" stroke="#0066b3" d="M 70 20 L 30 50 L 70 80" />
-    </svg>
-    <svg id="recycle" class="navigation text"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" version="1.1" onclick="catalog_nav_recycle()">
-      <g id="recycle_circle" style="visibility: visible">
-	<circle fill="none" stroke="#0066b3" stroke-width="50" cx="150" cy="150" r="100"/>
-	<circle fill="#0066b3" stroke="none" cx="150" cy="150" r="30"/>
-      </g>
-      <g id="recycle_rect" style="visibility: hidden">
-	<rect fill="none" stroke="#0066b3" stroke-width="50" x="50" y="50" width="200" height="200"/>
-	<rect fill="#0066b3" stroke="none" x="120" y="120" width="60" height="60"/>
-      </g>
-    </svg>
-    <svg id="right" class="navigation text" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" onclick="catalog_nav_right()">
-      <path fill="none" stroke-width="20" stroke="#0066b3" d="M 30 20 L 70 50 L 30 80" />
-    </svg>
+    <div id="navigation" class="navigation">
+      <svg id="left" class="navigation text" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" onclick="catalog_nav_left()">
+	<path fill="none" stroke-width="20" stroke="#0066b3" d="M 70 20 L 30 50 L 70 80" />
+      </svg>
+      <svg id="recycle" class="navigation text"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" version="1.1" onclick="catalog_nav_recycle()">
+	<g id="recycle_circle" style="visibility: visible">
+	  <circle fill="none" stroke="#0066b3" stroke-width="50" cx="150" cy="150" r="100"/>
+	  <circle fill="#0066b3" stroke="none" cx="150" cy="150" r="30"/>
+	</g>
+	<g id="recycle_rect" style="visibility: hidden">
+	  <rect fill="none" stroke="#0066b3" stroke-width="50" x="50" y="50" width="200" height="200"/>
+	  <rect fill="#0066b3" stroke="none" x="120" y="120" width="60" height="60"/>
+	</g>
+      </svg>
+      <svg id="right" class="navigation text" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" onclick="catalog_nav_right()">
+	<path fill="none" stroke-width="20" stroke="#0066b3" d="M 30 20 L 70 50 L 30 80" />
+      </svg>
+    </div>
 
     <div id="page" class="page text">
       <dl class="text">
@@ -179,6 +201,7 @@
 
 	<dt class="text"><a rel="me" class="text" href="https://datatracker.ietf.org/person/John%20Douglas%20Pritchard"><img class="text" src="/images/ietf.svg"/><span class="text">jdp@syntelos.io</span></a></dt>
 	<dd class="text"><a rel="me" class="text" href="https://datatracker.ietf.org/person/jdp@cs.columbia.edu"><img class="text" src="/images/ietf.svg"/><span class="text">jdp@cs.columbia.edu</span></a></dd>
+
       </dl>
     </div>
   </body>
