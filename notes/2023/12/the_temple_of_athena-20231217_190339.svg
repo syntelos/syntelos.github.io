@@ -1,0 +1,34 @@
+<?xml version="1.0" standalone="no"?>
+<?xml-stylesheet href="https://cdn.jsdelivr.net/gh/aaaakshat/cm-web-fonts@latest/fonts.css" type="text/css"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="500" height="500" viewBox="0 0 500 500">
+  <defs>
+    <style type="text/css">
+      text {
+	  font-family: "Computer Modern Serif", serif;
+	  font-size: 12;
+	  fill: black;
+      }
+      text.title {
+	  font-size: 22;
+	  font-weight: bold
+      }
+    </style>
+  </defs>
+  <rect x="0" y="0" width="500" height="500" fill="#FFF" stroke="#000" stroke-width="30" />
+  <text class="title" x="40" y="50">the temple of athena</text>
+  <text x="40" y="76">  The conception of individual, society, and humanity stand</text>
+  <text x="40" y="89">  in the substance of significance by moral autonomy, and</text>
+  <text x="40" y="102">  fall in the betrayal of inhumanity by moral heteronomy.</text>
+  <text x="40" y="115">  Throughout history.</text>
+  <text x="40" y="141">  The individualism, socialism, and communism of peace and</text>
+  <text x="40" y="154">  dignity in the light of awareness.  The cynicism, egoism,</text>
+  <text x="40" y="167">  and nihilism of conflict and war in the darkness of</text>
+  <text x="40" y="180">  ignorance, infidelity, and inferiority.  Intellect and</text>
+  <text x="40" y="193">  insanity a milieu of ambiguity lost to the occasions of</text>
+  <text x="40" y="206">  cacophony and confusion that service the convenience of</text>
+  <text x="40" y="219">  narcissism, avarice, and sadism.</text>
+  <text x="40" y="245">  A chaos that obscures the conception of intellect</text>
+  <text x="40" y="258">  necessary to the dominion of patience, reflection, peace,</text>
+  <text x="40" y="271">  and dignity.  The realms of history as experience.</text>
+</svg>

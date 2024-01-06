@@ -1,0 +1,39 @@
+<?xml version="1.0" standalone="no"?>
+<?xml-stylesheet href="https://cdn.jsdelivr.net/gh/aaaakshat/cm-web-fonts@latest/fonts.css" type="text/css"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="500" height="500" viewBox="0 0 500 500">
+  <defs>
+    <style type="text/css">
+      text {
+	  font-family: "Computer Modern Serif", serif;
+	  font-size: 12;
+	  fill: black;
+      }
+      text.title {
+	  font-size: 22;
+	  font-weight: bold
+      }
+    </style>
+  </defs>
+  <rect x="0" y="0" width="500" height="500" fill="#FFF" stroke="#000" stroke-width="30" />
+  <text class="title" x="40" y="50">sociology</text>
+  <text x="40" y="76">  It is ironic that governments be not structured for the</text>
+  <text x="40" y="89">  benefit of society, but for the exploitation of</text>
+  <text x="40" y="102">  population.  It is ironic that war in the large reflects</text>
+  <text x="40" y="115">  whore in the small, but should remain poorly understood</text>
+  <text x="40" y="128">  while a common and universal observable.  It is ironic</text>
+  <text x="40" y="141">  that law as the conservation of the freedom of</text>
+  <text x="40" y="154">  egalitarianism and security as proletarianism should be</text>
+  <text x="40" y="167">  doubted as legislation, adjudication, enforcement, and</text>
+  <text x="40" y="180">  reinforcement.</text>
+  <text x="40" y="206">  Rather, it is true that the common and universal conflict</text>
+  <text x="40" y="219">  of society is moral sanity differentiated from moral</text>
+  <text x="40" y="232">  apathy and moral insanity.  That the prevalence of</text>
+  <text x="40" y="245">  nihilism obscures the prevalence of humanism by the</text>
+  <text x="40" y="258">  fictions of manipulation, exploitation, and annihilation</text>
+  <text x="40" y="271">  found in the distraction, deflection, deception,</text>
+  <text x="40" y="284">  deprivation, and depredation of nihilism that we</text>
+  <text x="40" y="297">  criminalize in the conservation of individualistic</text>
+  <text x="40" y="310">  independence, socialistic interdependence, and communistic</text>
+  <text x="40" y="323">  dependence.</text>
+</svg>

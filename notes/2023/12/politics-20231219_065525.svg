@@ -1,0 +1,41 @@
+<?xml version="1.0" standalone="no"?>
+<?xml-stylesheet href="https://cdn.jsdelivr.net/gh/aaaakshat/cm-web-fonts@latest/fonts.css" type="text/css"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="500" height="500" viewBox="0 0 500 500">
+  <defs>
+    <style type="text/css">
+      text {
+	  font-family: "Computer Modern Serif", serif;
+	  font-size: 12;
+	  fill: black;
+      }
+      text.title {
+	  font-size: 22;
+	  font-weight: bold
+      }
+    </style>
+  </defs>
+  <rect x="0" y="0" width="500" height="500" fill="#FFF" stroke="#000" stroke-width="30" />
+  <text class="title" x="40" y="50">politics</text>
+  <text x="40" y="76">  The payola business is a political crime.  The legislative</text>
+  <text x="40" y="89">  violations of the Hatch Act which recompense elections.</text>
+  <text x="40" y="102">  For example, The Trump Tax Cuts.</text>
+  <text x="40" y="128">  Political extortion assures the obscurity of the political</text>
+  <text x="40" y="141">  crime of the political prostitution of "exploitation</text>
+  <text x="40" y="154">  government".</text>
+  <text x="40" y="180">  The intrigues of population manipulation and government</text>
+  <text x="40" y="193">  megalomania the morass of medievalism.  The wasting of</text>
+  <text x="40" y="206">  self and other to the selfishness, defeatism, and</text>
+  <text x="40" y="219">  annhilation of narcissism, avarice, and sadism.</text>
+  <text x="40" y="245">  A perpetual scenography of political larceny and felony.</text>
+  <text x="40" y="258">  The payola and its varieties of normalization and</text>
+  <text x="40" y="271">  obfuscation.  For example, The Trump National Debt.</text>
+  <text x="40" y="297">  In the historical review, Reaganomics: A Historical</text>
+  <text x="40" y="310">  Watershed (2018), the history of "trickle down economics"</text>
+  <text x="40" y="323">  is documented in the diverse contexts of theory and policy</text>
+  <text x="40" y="336">  that constitute the complexity of the national experience.</text>
+  <text x="40" y="375">  References</text>
+  <text x="40" y="401">    Komlos, John, Reaganomics: A Historical Watershed</text>
+  <text x="40" y="414">    (2018). CESifo Working Paper No. 7301,</text>
+  <text x="40" y="427">    https://ssrn.com/abstract=3338628</text>
+</svg>

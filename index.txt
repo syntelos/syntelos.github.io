@@ -1,4 +1,5 @@
 recent
+notes
 twitter
 bookmarks
 collections

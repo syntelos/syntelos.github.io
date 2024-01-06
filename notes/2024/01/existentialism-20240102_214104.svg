@@ -1,0 +1,37 @@
+<?xml version="1.0" standalone="no"?>
+<?xml-stylesheet href="https://cdn.jsdelivr.net/gh/aaaakshat/cm-web-fonts@latest/fonts.css" type="text/css"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="500" height="500" viewBox="0 0 500 500">
+  <defs>
+    <style type="text/css">
+      text {
+	  font-family: "Computer Modern Serif", serif;
+	  font-size: 12;
+	  fill: black;
+      }
+      text.title {
+	  font-size: 22;
+	  font-weight: bold
+      }
+    </style>
+  </defs>
+  <rect x="0" y="0" width="500" height="500" fill="#FFF" stroke="#000" stroke-width="30" />
+  <text class="title" x="40" y="50">existentialism</text>
+  <text x="40" y="76">  Mia Schem was a beautiful girl last summer.  This winter</text>
+  <text x="40" y="89">  she has become a beautiful woman.  The experience of hell</text>
+  <text x="40" y="102">  wears well in the courage to overcome it.  The horrors</text>
+  <text x="40" y="115">  suffered and endured have the greatness of majesty that</text>
+  <text x="40" y="128">  imbues her tattoos with the currency of humanity and</text>
+  <text x="40" y="141">  history.  The magnificence of greatness in the</text>
+  <text x="40" y="154">  independence of individual for all to witness and reflect</text>
+  <text x="40" y="167">  upon.</text>
+  <text x="40" y="193">  In this age when too many succumb to the suggestion that</text>
+  <text x="40" y="206">  the violence of the crime is the public defense of the</text>
+  <text x="40" y="219">  crime, overcoming the crimes against humanity in the</text>
+  <text x="40" y="232">  communication of society and person breaks the familiarity</text>
+  <text x="40" y="245">  of the commons that coddles the cowardice and inanity of</text>
+  <text x="40" y="258">  cynicism and nihilism which constitute the annihilation</text>
+  <text x="40" y="271">  parasitism that are responsible for squandering</text>
+  <text x="40" y="284">  sovereignty to the slavery that relates addiction to</text>
+  <text x="40" y="297">  carelessness and recklessness.</text>
+</svg>

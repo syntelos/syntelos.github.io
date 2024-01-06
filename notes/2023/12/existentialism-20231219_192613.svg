@@ -1,0 +1,57 @@
+<?xml version="1.0" standalone="no"?>
+<?xml-stylesheet href="https://cdn.jsdelivr.net/gh/aaaakshat/cm-web-fonts@latest/fonts.css" type="text/css"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="500" height="500" viewBox="0 0 500 500">
+  <defs>
+    <style type="text/css">
+      text {
+	  font-family: "Computer Modern Serif", serif;
+	  font-size: 12;
+	  fill: black;
+      }
+      text.title {
+	  font-size: 22;
+	  font-weight: bold
+      }
+    </style>
+  </defs>
+  <rect x="0" y="0" width="500" height="500" fill="#FFF" stroke="#000" stroke-width="30" />
+  <text class="title" x="40" y="50">existentialism</text>
+  <text x="40" y="76">  The frame that captures humanity and inhumanity,</text>
+  <text x="40" y="89">  communication and person, freedom and slavery, maturity</text>
+  <text x="40" y="102">  and immaturity, wellbeing and illbeing, is a frame that</text>
+  <text x="40" y="115">  captures existence in humanity and inhumanity, wellbeing</text>
+  <text x="40" y="128">  and illbeing, freedom and slavery, nobility and ignominy.</text>
+  <text x="40" y="141">  An awareness of the past, present, and future of this</text>
+  <text x="40" y="154">  existence as well as the past, present, and future of the</text>
+  <text x="40" y="167">  alternative existences of others.  The frames necessary to</text>
+  <text x="40" y="180">  communication, conception, and comprehension.</text>
+  <text x="40" y="206">  The sights of being in maturity and immaturity must</text>
+  <text x="40" y="219">  conceive of adultism and infantilism, wellbeing and</text>
+  <text x="40" y="232">  illbeing, sanity and insanity.  The sights of nobility as</text>
+  <text x="40" y="245">  the freedom of egalitarianism, the security of</text>
+  <text x="40" y="258">  proletarianism, the fidelity of humanism, and the</text>
+  <text x="40" y="271">  integrity of intellectualism.  The sights of ignominy as</text>
+  <text x="40" y="284">  the slavery of infantilism, the insecurity of depravity,</text>
+  <text x="40" y="297">  and the infidelity of immorality.  Require conception for</text>
+  <text x="40" y="310">  understanding.  Require experience for contextualization.  </text>
+  <text x="40" y="336">  The margins of our boundaries are rivers and mountains of</text>
+  <text x="40" y="349">  distraction, deflection, deprivation, and depredation that</text>
+  <text x="40" y="362">  obscurity would obfuscate.  The obfuscations of</text>
+  <text x="40" y="375">  narcissism, avarice, and sadism demand supremacy by</text>
+  <text x="40" y="388">  distraction, deflection, deception, and denial.  The</text>
+  <text x="40" y="401">  subjugation by violence a milieu of insanity.  The social</text>
+  <text x="40" y="414">  conflict of the intellectual forfeiture that fails to</text>
+  <text x="40" y="427">  conceive of society, its membership and obligations.</text>
+  <text x="40" y="440">  Moral autonomy.  Individual independence.  Socialistic</text>
+  <text x="40" y="453">  interdependence.  Communistic dependence.  The necessity</text>
+  <text x="40" y="466">  of government, and the rule of law.</text>
+  <text x="40" y="492">  The past, present, and future of humanity differentiated</text>
+  <text x="40" y="505">  from the absolutism of moral depravity may be most present</text>
+  <text x="40" y="518">  in children as vulnerable.  The actuality of childhood</text>
+  <text x="40" y="531">  contrasted to the reality of childhood in awareness and</text>
+  <text x="40" y="544">  perspective.  The differentiation of childhood from the</text>
+  <text x="40" y="557">  criminal neglect evident in the experience of infantilism</text>
+  <text x="40" y="570">  as represented by Donald Trump and the "exploitation</text>
+  <text x="40" y="583">  government" of nihilistic culture.</text>
+</svg>

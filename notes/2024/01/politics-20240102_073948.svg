@@ -1,0 +1,44 @@
+<?xml version="1.0" standalone="no"?>
+<?xml-stylesheet href="https://cdn.jsdelivr.net/gh/aaaakshat/cm-web-fonts@latest/fonts.css" type="text/css"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="500" height="500" viewBox="0 0 500 500">
+  <defs>
+    <style type="text/css">
+      text {
+	  font-family: "Computer Modern Serif", serif;
+	  font-size: 12;
+	  fill: black;
+      }
+      text.title {
+	  font-size: 22;
+	  font-weight: bold
+      }
+    </style>
+  </defs>
+  <rect x="0" y="0" width="500" height="500" fill="#FFF" stroke="#000" stroke-width="30" />
+  <text class="title" x="40" y="50">politics</text>
+  <text x="40" y="76">  The world is full of good people.  Earnest and sincere.</text>
+  <text x="40" y="89">  Social and altruistic.  Trustworthy.</text>
+  <text x="40" y="115">  However our politics reflects the moral apathy of cynicism</text>
+  <text x="40" y="128">  and moral insanity of nihilism responsible for our present</text>
+  <text x="40" y="141">  situation in the moral inversion of government from the</text>
+  <text x="40" y="154">  public good to the public bad, from public service to</text>
+  <text x="40" y="167">  public exploitation, from survival, subsistence, and</text>
+  <text x="40" y="180">  sustenance to deprivation, depredation, and destruction.</text>
+  <text x="40" y="206">  We failed to recognize actuality, and industriously</text>
+  <text x="40" y="219">  pursued the failure in the elaboration of reality with the</text>
+  <text x="40" y="232">  pareidolia of egomania.  We have squandered sovereignty to</text>
+  <text x="40" y="245">  slavery such that we again confront the election of the</text>
+  <text x="40" y="258">  representation of the very inanity of insanity that</text>
+  <text x="40" y="271">  threatens the rule of law, the freedom of egalitarianism,</text>
+  <text x="40" y="284">  and the security of proletarianism by the degradation,</text>
+  <text x="40" y="297">  distraction, deflection, deprivation, depredation, and</text>
+  <text x="40" y="310">  destruction that relates addiction to carelessness and</text>
+  <text x="40" y="323">  recklessness.</text>
+  <text x="40" y="336">  </text>
+  <text x="40" y="362">References</text>
+  <text x="40" y="388">  https://www.google.com/books/edition/The_Bill_of_Obligations/WUN_EAAAQBAJ</text>
+  <text x="40" y="401">  https://www.pbs.org/show/a-citizens-guide-to-preserving-democracy/</text>
+  <text x="40" y="414">  https://www.youtube.com/watch?v=LbezUZQYuVQ</text>
+  <text x="40" y="427">  https://www.pbs.org/video/a-citizens-guide-to-preserving-democracy-teaser-trailer-tnfm/</text>
+</svg>
