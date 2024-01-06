@@ -30,5 +30,69 @@
         "link": "https://drive.google.com/drive/folders/1uhgjgL8HBzRwCgP6pXpCwQqLZ0IC_pgJ",
         "name": "politics",
         "embed": "/notes/2024/01/politics-20240104_112200.svg"
+    },
+    {
+        "id": "20231213_155157",
+        "icon": "syntelos-catalog",
+        "path": "/gegonen /the_temple_of_athena",
+        "link": "https://drive.google.com/drive/folders/1nUpMgy9n-wHWN13hlXm-YZH5rojTUi0j",
+        "name": "the_temple_of_athena",
+        "embed": "/notes/2023/12/the_temple_of_athena-20231213_155157.svg"
+    },
+    {
+        "id": "20231217_190339",
+        "icon": "syntelos-catalog",
+        "path": "/gegonen /the_temple_of_athena",
+        "link": "https://drive.google.com/drive/folders/1nUpMgy9n-wHWN13hlXm-YZH5rojTUi0j",
+        "name": "the_temple_of_athena",
+        "embed": "/notes/2023/12/the_temple_of_athena-20231217_190339.svg"
+    },
+    {
+        "id": "20231219_065525",
+        "icon": "syntelos-catalog",
+        "path": "/gegonen /politics",
+        "link": "https://drive.google.com/drive/folders/1uhgjgL8HBzRwCgP6pXpCwQqLZ0IC_pgJ",
+        "name": "politics",
+        "embed": "/notes/2023/12/politics-20231219_065525.svg"
+    },
+    {
+        "id": "20231219_192613",
+        "icon": "syntelos-catalog",
+        "path": "/syntelos /science /anthropology /existentialism",
+        "link": "https://drive.google.com/drive/folders/162g6-KM5dOkWvJX7NgMRoKJuz8rkwk96",
+        "name": "existentialism",
+        "embed": "/notes/2023/12/existentialism-20231219_192613.svg"
+    },
+    {
+        "id": "20231221_074246",
+        "icon": "syntelos-catalog",
+        "path": "/syntelos /science /anthropology /sociology",
+        "link": "https://drive.google.com/drive/folders/1etCIitYhVQH8_Wf6oHeu_rWUmDfTYZD-",
+        "name": "sociology",
+        "embed": "/notes/2023/12/sociology-20231221_074246.svg"
+    },
+    {
+        "id": "20231221_152849",
+        "icon": "syntelos-catalog",
+        "path": "/gegonen /politics",
+        "link": "https://drive.google.com/drive/folders/1uhgjgL8HBzRwCgP6pXpCwQqLZ0IC_pgJ",
+        "name": "politics",
+        "embed": "/notes/2023/12/politics-20231221_152849.svg"
+    },
+    {
+        "id": "20231222_063428",
+        "icon": "syntelos-catalog",
+        "path": "/syntelos /science /anthropology /sociology",
+        "link": "https://drive.google.com/drive/folders/1etCIitYhVQH8_Wf6oHeu_rWUmDfTYZD-",
+        "name": "sociology",
+        "embed": "/notes/2023/12/sociology-20231222_063428.svg"
+    },
+    {
+        "id": "20231231_120412",
+        "icon": "syntelos-catalog",
+        "path": "/syntelos /science /anthropology /sociology",
+        "link": "https://drive.google.com/drive/folders/1etCIitYhVQH8_Wf6oHeu_rWUmDfTYZD-",
+        "name": "sociology",
+        "embed": "/notes/2023/12/sociology-20231231_120412.svg"
     }
 ]
