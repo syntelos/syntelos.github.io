@@ -1,0 +1,29 @@
+<?xml version="1.0" standalone="no"?>
+<?xml-stylesheet href="https://cdn.jsdelivr.net/gh/aaaakshat/cm-web-fonts@latest/fonts.css" type="text/css"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="500" height="500" viewBox="0 0 500 500">
+  <defs>
+    <style type="text/css">
+      text {
+	  font-family: "Computer Modern Serif", serif;
+	  font-size: 12;
+	  fill: black;
+      }
+      text.title {
+	  font-size: 22;
+	  font-weight: bold
+      }
+    </style>
+  </defs>
+  <rect x="0" y="0" width="500" height="500" fill="#FFF" stroke="#000" stroke-width="30" />
+  <text class="title" x="30" y="50">existentialism</text>
+  <text x="30" y="86">  The existential revelations afforded by vulnerability and</text>
+  <text x="30" y="104">  insecurity expose the deficits of the cultural history of</text>
+  <text x="30" y="122">  nihilism.  A sociological review of population and planet</text>
+  <text x="30" y="140">  reveals the denial of self evident in the reflections of</text>
+  <text x="30" y="158">  the black and white cultures of inferiority and</text>
+  <text x="30" y="176">  superiority.  Division the instrument of hegemony.</text>
+  <text x="30" y="194">  Conquest the admiration of envy.  Exploitation a virtually</text>
+  <text x="30" y="212">  universal object found in varieties of surivial,</text>
+  <text x="30" y="230">  subsistence, sustenance, and continuity.</text>
+</svg>

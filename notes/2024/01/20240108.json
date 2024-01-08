@@ -1,5 +1,21 @@
 [
     {
+        "id": "20240108_134811",
+        "icon": "syntelos-catalog",
+        "path": "/syntelos /science /anthropology /existentialism",
+        "link": "https://drive.google.com/drive/folders/162g6-KM5dOkWvJX7NgMRoKJuz8rkwk96",
+        "name": "existentialism",
+        "embed": "/notes/2024/01/existentialism-20240108_134811.svg"
+    },
+    {
+        "id": "20240108_125005",
+        "icon": "syntelos-catalog",
+        "path": "/syntelos /science /anthropology /instrumentality",
+        "link": "https://drive.google.com/drive/folders/1YqybUMCurpLc0WdTOuUjew7EujYGFDuG",
+        "name": "instrumentality",
+        "embed": "/notes/2024/01/instrumentality-20240108_125005.png"
+    },
+    {
         "id": "20240108_052043",
         "icon": "syntelos-catalog",
         "path": "/syntelos /science /anthropology /communication",
