@@ -10,7 +10,7 @@ for src in ${list}
 do
     name=$(echo ${src} | sed 's%\.[a-z]*%%')
     tablename=$(echo ${src} | sed 's/-.*//')
-    datetime=$(echo ${src} | sed 's%.*-%%; s%\.png%%;')
+    datetime=$(echo ${src} | sed 's%.*-%%; s%\.png%%; s%\.svg%%;')
     yyyy=$(echo ${datetime} | sed 's%_.*%%; s%....$%%;')
     mm=$(echo ${datetime} | sed 's%_.*%%; s%..$%%; s%^....%%;')
     if [ "${tail}" = "${src}" ]
