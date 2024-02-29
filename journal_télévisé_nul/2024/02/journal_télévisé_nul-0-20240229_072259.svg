@@ -1,0 +1,36 @@
+<?xml version="1.0" standalone="no"?>
+<?xml-stylesheet href="https://cdn.jsdelivr.net/gh/aaaakshat/cm-web-fonts@latest/fonts.css" type="text/css"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="500" height="500" viewBox="0 0 500 500">
+  <defs>
+    <style type="text/css">
+      text.rm {
+	  font-family: "Computer Modern Serif", serif;
+	  font-size: 12;
+	  fill: black;
+      }
+      text.tt {
+	  font-family: "Computer Modern Typewriter", monospace;
+	  font-size: 12;
+	  fill: black;
+      }
+      text.ti {
+	  font-size: 22;
+	  font-weight: bold
+      }
+      text.ln {
+          fill: #0066B3
+      }
+    </style>
+  </defs>
+  <rect x="0" y="0" width="500" height="500" fill="#FFF" stroke="#000" stroke-width="30" />
+  <text x="30" y="50" class="rm ti">journal télévisé nul</text>
+  <text x="42" y="86" class="rm">Vladimir Putin demonstrating the inanity of insanity</text>
+  <text x="42" y="104" class="rm">responsible for Russia's war of aggression against</text>
+  <text x="42" y="122" class="rm">Ukraine.  The political theater of distraction,</text>
+  <text x="42" y="140" class="rm">deception, deprivation, depredation, and destruction</text>
+  <text x="42" y="158" class="rm">that is the world food program for the extortions of</text>
+  <text x="42" y="176" class="rm">ideological depravity that convenience the self</text>
+  <text x="42" y="194" class="rm">gratification of the invisibility of the infantilism.</text>
+  <a href="http://en.kremlin.ru/events/president/news/73585"><text x="42" y="230" class="rm ln">http://en.kremlin.ru/events/president/news/73585</text></a>
+</svg>
