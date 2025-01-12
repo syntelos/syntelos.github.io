@@ -219,8 +219,7 @@ function catalog_nav_right (){
 /*
  * The "hashchange" event listener functions in the page
  * state realm, needing to synchronize the selector and the
- * selection with the document location hash as linked from
- * the "#list" page.
+ * selection with the document location hash.
  */
 function catalog_nav_hashchange(e){
     /*
@@ -250,8 +249,7 @@ function catalog_nav_hashchange(e){
 /*
  * The "keypress" event listener functions in the page
  * state realm, needing to synchronize the selector and the
- * selection with the document location hash as linked from
- * the "#list" page.
+ * selection with the document location hash.
  */
 function catalog_nav_keypress(e){
 
@@ -402,7 +400,7 @@ function catalog_page_begin (){
 
     } else {
 
-	return document_location_hash_nav('page')
+	return document_location_hash_nav('list')
     }
 }
 
@@ -960,7 +958,7 @@ function catalog_configure_pages(){
 
             if (null != child && "page text" == child.className){
 
-		if ("page" == child.id){
+		if ("list" == child.id){
 
 		    child.style.visibility = 'visible';
 		}
@@ -990,8 +988,6 @@ function catalog_configure_pages(){
 		    var directory = JSON.parse(catalog_pages_loader.responseText);
 
 		    catalog_configure_pages_construct_select(directory)
-
-		    catalog_configure_pages_construct_list(directory)
 
 		    catalog_configure_pages_construct_frames(directory)
 
@@ -1031,34 +1027,6 @@ function catalog_configure_pages_construct_select(directory){
 	    console.error(e)
 	}
 	try {
-	    var id = 'page'
-	    var option = document.createElement("option");
-	    option.className = 'text';
-	    option.value = id;
-
-	    option.innerText = id;
-
-            option.selected = (id == catalog_identifier)
-
-	    select.appendChild(option);
-	} catch (e){
-	    console.error(e)
-	}
-	try {
-	    var id = 'list'
-	    var option = document.createElement("option");
-	    option.className = 'text';
-	    option.value = id;
-
-	    option.innerText = id;
-
-            option.selected = (id == catalog_identifier)
-
-	    select.appendChild(option);
-	} catch (e){
-	    console.error(e)
-	}
-	try {
             var count = directory.length;
             var index;
             for (index = 0; index < count; index++){
@@ -1085,69 +1053,6 @@ function catalog_configure_pages_construct_select(directory){
 	}
         select.onchange = catalog_select_catalog_identifier;
     }
-}
-
-/*
- */
-function catalog_configure_pages_construct_list(directory){
-
-    div = document.getElementById("list");
-    if (null != div){
-
-        document.removeChild(div);
-    }
-
-    div = document.createElement("div")
-    div.id = "list"
-    div.className = 'page text'
-    div.style.visibility = 'hidden'
-
-    dl = document.createElement("dl");
-    dl.className = 'text';
-    div.appendChild(dl);
-
-
-    var count = directory.length;
-    var index;
-    for (index = 0; index < count; index++){
-	pg = directory[index]
-        if (pg.id && pg.icon && pg.path && pg.link){
-	    
-            dt = document.createElement("dt");
-            dt.className = 'text';
-            dl.appendChild(dt);
-
-	    a = document.createElement("a");
-	    a.className = 'text';
-	    a.href = document_location_hash_did(pg.id)
-	    a.onclick = catalog_paging_manual
-
-	    img = document.createElement("img");
-	    img.className  = 'text';
-	    img.src = '/images/syntelos-catalog.svg';
-
-	    a.appendChild(img);
-	    if (pg.name){
-
-		txt = document.createElement("span");
-		txt.className = 'text';
-		txt.innerText = pathify_name(pg.name);
-
-		a.appendChild(txt);
-
-	    } else {
-
-		txt = document.createElement("span");
-		txt.className = 'text';
-		txt.innerText = pg.path;
-
-		a.appendChild(txt);
-	    }
-	    dt.appendChild(a);
-	}
-    }
-
-    document.body.appendChild(div);
 }
 
 /*
