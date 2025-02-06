@@ -48,7 +48,7 @@ function document_location_hash_put(){
 
 	var reference = (catalog_volume+'/'+catalog_directory+'/'+catalog_identifier);
 
-	document.location.hash = reference;
+	document.location.hash = encodeURI(reference);
 
 	return true;
     }
@@ -63,7 +63,7 @@ function document_location_hash_put(){
  */
 function document_location_hash_get(){
     if (null != document.location.hash && 0 != document.location.hash.length){
-	var anchor = document.location.hash;
+	var anchor = decodeURI(document.location.hash);
 	if ('#' == anchor[0]){
 	    anchor = anchor.substring(1,anchor.length)
 	}
@@ -100,7 +100,7 @@ function document_location_hash_did(id){
 
     if (catalog_volume && catalog_directory && id){
 
-	return '#'+catalog_volume+'/'+catalog_directory+'/'+pg.id;
+	return encodeURI('#'+catalog_volume+'/'+catalog_directory+'/'+pg.id);
     } else {
 	return ""
     }
@@ -226,7 +226,7 @@ function catalog_nav_hashchange(e){
      * Location
      */
     if (null != document.location.hash && 0 != document.location.hash.length){
-	var anchor = document.location.hash;
+	var anchor = decodeURI(document.location.hash);
 	if ('#' == anchor[0]){
 	    anchor = anchor.substring(1,anchor.length);
 	}
@@ -718,7 +718,7 @@ function catalog_configure_year(){
 
 	var catalog_year_loader = new XMLHttpRequest();
 
-	var catalog_year_reference = "/"+catalog_volume+"/index.txt";
+	var catalog_year_reference = encodeURI("/"+catalog_volume+"/index.txt");
 
 	catalog_year_loader.open("GET",catalog_year_reference,false);
 
@@ -796,7 +796,7 @@ function catalog_configure_month(){
 	
 	var catalog_month_loader = new XMLHttpRequest();
 
-	var catalog_month_reference = "/"+catalog_volume+"/"+catalog_year+"/index.txt";
+	var catalog_month_reference = encodeURI("/"+catalog_volume+"/"+catalog_year+"/index.txt");
 
 	catalog_month_loader.open("GET",catalog_month_reference,false);
 
@@ -873,7 +873,7 @@ function catalog_configure_directory(){
 	
 	var catalog_directory_loader = new XMLHttpRequest();
 
-	var catalog_directory_reference = "/"+catalog_volume+"/"+catalog_year+'/'+catalog_month+"/index.txt";
+	var catalog_directory_reference = encodeURI("/"+catalog_volume+"/"+catalog_year+'/'+catalog_month+"/index.txt");
 
 	catalog_directory_loader.open("GET",catalog_directory_reference,false);
 
@@ -975,7 +975,7 @@ function catalog_configure_pages(){
 
 	var catalog_pages_loader = new XMLHttpRequest();
 
-	var catalog_pages_reference = "/"+catalog_volume+"/"+catalog_year+'/'+catalog_month+'/'+catalog_directory+".json";
+	var catalog_pages_reference = encodeURI("/"+catalog_volume+"/"+catalog_year+'/'+catalog_month+'/'+catalog_directory+".json");
 
 	catalog_pages_loader.open("GET",catalog_pages_reference,false);
 
