@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
+              "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 1000 1000">
+
+  <rect id="bg" x="0" y="0" width="1000" height="1000"
+        fill="#EFEFEF" stroke="none"/>
+
+  <rect id="page" x="100" y="100" width="800" height="800"
+        fill="#FFFFFF" stroke="none"/>
+
+  <g externalResourcesRequired="true" font-family="Computer Modern Serif" font-face-src="https://cdn.jsdelivr.net/gh/aaaakshat/cm-web-fonts@latest/font/Serif/cmunrm.eot">
+    <text x="125" y="400" font-size="60">An understanding of feminism</text>
+    <text x="350" y="700" font-size="30">John Douglas Pritchard</text>
+  </g>  
+</svg>
