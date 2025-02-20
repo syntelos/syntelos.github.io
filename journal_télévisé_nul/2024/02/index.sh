@@ -18,7 +18,7 @@ do
 	cat<<EOF>>${target}
     {
         "id": "${datetime}",
-        "icon": "syntelos-catalog",
+        "icon": "syntelos",
         "path": "${tablename}",
         "link": "https://drive.google.com/drive/folders/1r12NAOW-14pcXRNnlGsvUXGCAx42SyAy?usp=drive_link",
 	"name": "${name}",
@@ -29,7 +29,7 @@ EOF
 	cat<<EOF>>${target}
     {
         "id": "${datetime}",
-        "icon": "syntelos-catalog",
+        "icon": "syntelos",
         "path": "${tablename}",
         "link": "https://drive.google.com/drive/folders/1r12NAOW-14pcXRNnlGsvUXGCAx42SyAy?usp=drive_link",
 	"name": "${name}",

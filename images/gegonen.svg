@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="US-ASCII" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3950 3950">
+  <g fill="none" stroke="#fff" stroke-width="180">
+    <circle cx="1975" cy="1975" r="750"/>
+    <circle cx="1975" cy="1975" r="750" stroke="#000" stroke-width="125"/>
+    <circle cx="2975" cy="1975" r="850"/>
+    <circle cx="975" cy="1975" r="850"/>
+    <g stroke="#000" stroke-width="125">
+      <circle cx="2975" cy="1975" r="850"/>
+      <circle cx="975" cy="1975" r="850"/>
+    </g>
+    <circle cx="1975" cy="975" r="850"/>
+    <circle cx="1975" cy="2975" r="850"/>
+    <g stroke="#000" stroke-width="125">
+      <circle cx="1975" cy="975" r="850"/>
+      <circle cx="1975" cy="2975" r="850"/>
+    </g>
+    <path d="M1444.67 2505.33a750 750 0 0 1 0-1060.66m1060.66 0a750 750 0 0 1 0 1060.66"/>
+    <path d="M1450 2510.61a750 750 0 0 1 0-1071.21m1050 0a750 750 0 0 1 0 1071.21" stroke="#000" stroke-width="125"/>
+  </g>
+</svg>
