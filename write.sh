@@ -105,54 +105,79 @@ function list {
 function increment {
     set -x
     if [ -d "${object}" ]&&[ -f "${object}/index.html" ] &&
-       catalog_last=$(last) && catalog_next=$(next) && ${catalog_last} != ${catalog_next}
+       catalog_last=$(last) && catalog_next=$(next) && [ "${catalog_last}" != "${catalog_next}" ] &&
+       id_last=$(basename ${catalog_last} .json) &&[ -n "${id_last}" ]&&
+       id_next=$(basename ${catalog_next} .json) &&[ -n "${id_next}" ]&&
+       year_next=$(echo ${object_next} | sed 's%....$%%') &&[ -n "${year_next}" ]&&
+       month_next=$(echo ${object_next} | sed 's%..$%%; s%^....%%;') &&[ -n "${month_next}" ]&&
+       ( [ -d "${year_next}/${month_next}" ]|| mkdir -p "${year_next}/${month_next}" )
     then
-	object_last=$(basename ${catalog_last} .json)
-	year_last=$(echo ${object_last} | sed 's%....$%%')
-	month_last=$(echo ${object_last} | sed 's%..$%%; s%^....%%;')
 
-	object_next=$(basename ${catalog_next} .json)
-	year_next=$(echo ${object_next} | sed 's%....$%%')
-	month_next=$(echo ${object_next} | sed 's%..$%%; s%^....%%;')
-
-	if cat ${catalog_last} | sed "s%${object_last}%${object_next}%g; s%${year_last}%${year_next}%g; s%${month_last}%${month_next}%g;" > ${catalog_next}
+	if cat<<EOF>${catalog_last}
+[
+  {
+    "id": "${object}-${id_last}",
+    "icon": "${object}",
+    "path": "/${object}",
+    "link": "/${object}/${object}-id_last.html",
+    "name": "${object}",
+    "embed": "/${object}/${object}.svg"
+  }
+]
+EOF
 	then
-	    echo ${catalog_next}
-	    cat -n ${catalog_next}
-	    git add ${catalog_next}
-
-	    source=${object}/index.html
-	    target=${object}/${object}-${object_last}.html
-
-	    if cp ${source} ${target}
+	    if cat<<EOF>${catalog_next}
+[
+  {
+    "id": "${object}-${id_next}",
+    "icon": "${object}",
+    "path": "/${object}",
+    "link": "/${object}/",
+    "name": "${object}",
+    "embed": "/${object}/${object}.svg"
+  }
+]
+EOF
 	    then
-		git add ${target}
 
-		yeday=$(egrep '<h6 class="title">' ${source} | sed 's%.*<h6 class="title">%%; s%</h6>%%;')
+		git add ${catalog_next}
 
-		today=$(date '+%A, %e %B %Y')
+		source=${object}/index.html
+		target=${object}/${object}-${object_last}.html
 
-		if cat ${source} | sed "s%${yeday}%${today}%" > /tmp/tmp
+		if cp ${source} ${target}
 		then
-		    cp /tmp/tmp ${source}
+		    git add ${target}
 
-		    git status --porcelain
+		    yeday=$(egrep '<h6 class="title">' ${source} | sed 's%.*<h6 class="title">%%; s%</h6>%%;')
 
-		    return 0
+		    today=$(date '+%A, %e %B %Y')
+
+		    if cat ${source} | sed "s%${yeday}%${today}%" > /tmp/tmp
+		    then
+			cp /tmp/tmp ${source}
+
+			git status --porcelain
+
+			return 0
+		    else
+			2>&1 echo "${pn} error updating html (date) state."
+			return 1
+		    fi
 		else
-		    2>&1 echo "${pn} error updating html date."
+		    2>&1 echo "${pn} error incrementing html (file) state."
 		    return 1
 		fi
 	    else
-		2>&1 echo "${pn} error incrementing html state."
+		2>&1 echo "${pn} error incrementing catalog (next) state."
 		return 1
 	    fi
 	else
-	    2>&1 echo "${pn} error incrementing catalog state."
+	    2>&1 echo "${pn} error incrementing catalog (last) state."
 	    return 1
 	fi
     else
-	2>&1 echo "${pn} error state next is present."
+	2>&1 echo "${pn} error journal (found) state."
 	return 1
     fi
 }

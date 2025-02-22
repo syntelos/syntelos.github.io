@@ -175,6 +175,57 @@ function gui_sync(){
 	    console.error(e)
 	}
     }
+    else {
+	/*
+	 * Selector
+	 */
+	try {
+	    var select = document.getElementById("catalog_identifier");
+	    if (select && select.hasChildNodes()){
+
+		var children = select.childNodes;
+		var count = children.length;
+		var index;
+		var option;
+
+		for (index = 0; index < count; index++){
+
+		    option = children.item(index);
+
+		    option.selected = ('about' == option.value);
+		}
+	    }
+	} catch (e){
+	    console.error(e)
+	}
+	/*
+	 * Selection
+	 */
+	try {
+	    var children = document.body.childNodes;
+
+	    var count = children.length;
+
+	    for (index = 0; index < count; index++){
+
+		child = children.item(index);
+
+		if ('page text' == child.className){
+
+		    if ('about' == child.id){
+
+			child.style.visibility = 'visible';
+		    }
+		    else {
+
+			child.style.visibility = 'hidden';
+		    }
+		}
+	    }
+	} catch (e){
+	    console.error(e)
+	}
+    }
 }
 
 /*
@@ -400,7 +451,7 @@ function catalog_page_begin (){
 
     } else {
 
-	return document_location_hash_nav('list')
+	return document_location_hash_nav('about')
     }
 }
 
@@ -942,8 +993,8 @@ function catalog_configure_directory(){
 }
 
 /*
- * UX constructor called from directory <onchange> and
- * construction.
+ * Catalog pages constructor called from document [body]
+ * <onload> and select [directory] <onchange>.
  */
 function catalog_configure_pages(){
     try {
@@ -958,7 +1009,7 @@ function catalog_configure_pages(){
 
             if (null != child && "page text" == child.className){
 
-		if ("list" == child.id){
+		if ("about" == child.id){
 
 		    child.style.visibility = 'visible';
 		}
@@ -1007,43 +1058,60 @@ function catalog_configure_pages(){
 }
 
 /*
+  * Catalog pages constructor called from
+  * <catalog_configure_pages>.
  */
-function catalog_configure_pages_construct_select(directory){
+function catalog_configure_pages_construct_select(catalog){
+    /*
+     * Retrieve [catalog_identifier] <select>
+     */
     var select = document.getElementById('catalog_identifier');
     if (select){
+	/*
+	 * Destroy [catalog_identifier] <select>
+	 */
         try {
             var children = select.childNodes;
             var count = children.length;
             var index;
-            var child;
+            var option;
 
-            for (index = (count-1); 0 <= index; index--){
+            for (index = (count-1); -1 < index; index--){
 
-                child = children.item(index);
+                option = children.item(index);
 
-                select.removeChild(child);
+		if ('catalog_identifier_about' == option.id){
+
+		    option.selected = true;
+		}
+		else {
+                    select.removeChild(option);
+		}
             }
         } catch (e){
 	    console.error(e)
 	}
+	/*
+	 * Construct [catalog_identifier] <select>
+	 */
 	try {
-            var count = directory.length;
+            var count = catalog.length;
             var index;
             for (index = 0; index < count; index++){
-		pg = directory[index]
+		record = catalog[index]
 
-		if (pg && pg.id){
+		if (record && record.id){
 		    var option = document.createElement("option");
 		    option.className = 'text';
-		    option.value = pg.id;
+		    option.value = record.id;
 
-		    if (pg.name){
-			option.innerText = selectify_name(pg.name);
+		    if (record.name){
+			option.innerText = selectify_name(record.name);
 		    } else {
-			option.innerText = pg.id;
+			option.innerText = record.id;
 		    }
 
-                    option.selected = (pg.id == catalog_identifier);
+                    option.selected = false;
 
 		    select.appendChild(option);
 		}
@@ -1056,21 +1124,23 @@ function catalog_configure_pages_construct_select(directory){
 }
 
 /*
+ * Catalog pages constructor called from
+ * <catalog_configure_pages>.
  */
-function catalog_configure_pages_construct_frames(directory){
-    var count = directory.length;
+function catalog_configure_pages_construct_frames(catalog){
+    var count = catalog.length;
     var index;
 
     for (index = 0; index < count; index++){
-	pg = directory[index]
+	record = catalog[index]
 
-	div = document.getElementById(pg.id);
+	div = document.getElementById(record.id);
 
 	if (null == div){
 
             div = document.createElement("div");
 
-            div.id = pg.id;
+            div.id = record.id;
             div.className = 'page text';
             div.style.visibility = 'hidden';
 
@@ -1082,24 +1152,24 @@ function catalog_configure_pages_construct_frames(directory){
             dt.className = 'catalog';
             dl.appendChild(dt);
 
-            if (pg.link && pg.path){
+            if (record.link && record.path){
 
 		a = document.createElement("a");
 		a.className = 'text';
-		a.href = pg.link;
+		a.href = record.link;
 
-		if (pg.icon){
+		if (record.icon){
                     img = document.createElement("img");
                     img.className  = 'text';
-                    img.src = '/images/'+pg.icon+'.svg';
+                    img.src = '/images/'+record.icon+'.svg';
 
                     a.appendChild(img);
 		}
 
-		if (pg.path){
+		if (record.path){
                     txt = document.createElement("span");
                     txt.className = 'text';
-                    txt.innerText = pg.path;
+                    txt.innerText = record.path;
 
                     a.appendChild(txt);
 		}
@@ -1111,9 +1181,9 @@ function catalog_configure_pages_construct_frames(directory){
             dd.className = 'catalog';
             dl.appendChild(dd);
 
-            if (pg.embed){
+            if (record.embed){
 		ifr = document.createElement("iframe");
-		ifr.src = pg.embed;
+		ifr.src = record.embed;
 		ifr.className = 'embed';
 
 		dd.appendChild(ifr);
