@@ -1,5 +1,5 @@
 user-agent: *
 allow: /index.html
-allow: /gegonen/index.html
-allow: /logic/index.html
 allow: /lexist/index.html
+allow: /logic/index.html
+allow: /gegonen/index.html

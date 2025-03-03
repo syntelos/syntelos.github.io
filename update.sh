@@ -2,12 +2,15 @@
 
 if 2>/dev/null tgtd=recent/$(yyyy)/$(mm) && 2>/dev/null tgtf=${tgtd}/$(yyyymmdd).json
 then
+    #
     if [ ! -d "${tgtd}" ]
     then
 	mkdir -p "${tgtd}"
     fi
-
-    if recent gdr jsw "${tgtf}"
+    #
+    # N.B. [TODO/REVIEW] Evolution of "recent" into "go-wwweb".
+    #
+    if wwweb recent gdr jsw "${tgtf}"
     then
 	git add "${tgtf}"
 	./index.sh
