@@ -1,9 +1,17 @@
 [
-  {
-    "id": "structure-20260114",
+   {
+    "id": "structure-20260227",
     "icon": "gegonen",
     "path": "/structure",
     "link": "/structure/",
+    "name": "structure",
+    "embed": "/structure/structure.svg"
+  },
+   {
+    "id": "structure-20260114",
+    "icon": "gegonen",
+    "path": "/structure",
+    "link": "/structure/index-20260114.html",
     "name": "structure",
     "embed": "/structure/structure.svg"
   }

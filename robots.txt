@@ -1,5 +1,7 @@
 user-agent: *
+allow: /awareness/index.html
+allow: /gegonen/index.html
 allow: /index.html
 allow: /lexist/index.html
 allow: /logic/index.html
-allow: /gegonen/index.html
+allow: /structure/index.html
